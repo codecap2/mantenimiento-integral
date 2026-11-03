@@ -1,0 +1,84 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Trabajos realizados · Mantenimientos Integrales</title>
+  <meta name="description" content="Fotos de trabajos de fontanería, electricidad, pintura e impermeabilización en Aguascalientes.">
+  <meta name="theme-color" content="#0f2a44">
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="encabezado" id="encabezado">
+    <div class="contenedor encabezado__fila">
+      <a class="logo" href="index.html" aria-label="Mantenimientos Integrales, ir al inicio">
+        <svg class="logo__icono" viewBox="0 0 32 32" aria-hidden="true"><use href="img/iconos.svg#i-casa"/></svg>
+        <span>Mantenimientos <strong>Integrales</strong></span>
+      </a>
+      <button class="menu-boton" id="menu-boton" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="menu" id="menu" aria-label="Principal">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="trabajos.html" aria-current="page">Trabajos</a>
+        <a class="boton boton--chico" href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+    <div class="tubo-linea" aria-hidden="true"></div>
+  </header>
+
+  <main id="contenido">
+    <section class="cabecera-pagina oscuro">
+      <div class="contenedor aparecer">
+        <p class="etiqueta">Trabajos realizados</p>
+        <h1>Nuestro trabajo habla por nosotros</h1>
+        <p>Algunos de los trabajos que hemos hecho en Aguascalientes y Jesús María.</p>
+      </div>
+      <div class="tubo tubo--h" aria-hidden="true"></div>
+    </section>
+
+    <section class="seccion" aria-label="Galería de trabajos">
+      <div class="contenedor">
+        <div class="galeria" id="galeria"></div>
+
+        <div class="vacio aparecer" id="galeria-vacia">
+          <span class="salida__icono"><svg aria-hidden="true"><use href="img/iconos.svg#i-camara"/></svg></span>
+          <h2 class="h3">Muy pronto, fotos de nuestros trabajos</h2>
+          <p>Estamos preparando la galería. Mientras tanto, pídenos fotos de trabajos parecidos al tuyo.</p>
+          <a class="boton boton--whatsapp" data-wa="Hola, ¿me pueden mostrar fotos de trabajos que han hecho?" href="contacto.html" target="_blank" rel="noopener">
+            <svg aria-hidden="true"><use href="img/iconos.svg#i-whatsapp"/></svg> Pedir fotos por WhatsApp
+          </a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="tubo-linea" aria-hidden="true"></div>
+    <div class="cable-linea" aria-hidden="true"></div>
+    <div class="contenedor pie__fila">
+      <p>© <span id="anio">2026</span> Mantenimientos Integrales · Aguascalientes, México</p>
+      <nav aria-label="Pie de página">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="trabajos.html">Trabajos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </footer>
+
+  <a class="flotante" data-wa="Hola, vi su página y me gustaría una cotización." href="contacto.html" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+    <svg aria-hidden="true"><use href="img/iconos.svg#i-whatsapp"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script src="js/efectos.js"></script>
+</body>
+</html>

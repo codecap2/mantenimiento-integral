@@ -1,0 +1,267 @@
+<!doctype html>
+<html lang="es-MX">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Mantenimientos Integrales · Fontanería y electricidad en Aguascalientes</title>
+  <meta name="description" content="Especialistas en fontanería y electricidad en Aguascalientes y Jesús María. También pintura e impermeabilización. Cotiza por WhatsApp.">
+  <meta name="theme-color" content="#0f2a44">
+
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Mantenimientos Integrales">
+  <meta property="og:description" content="Fontanería, electricidad, pintura e impermeabilización en Aguascalientes y Jesús María.">
+  <meta property="og:locale" content="es_MX">
+
+  <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@600;700;800&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/estilos.css">
+
+  <!-- Datos para que Google entienda qué es el negocio -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "HomeAndConstructionBusiness",
+    "name": "Mantenimientos Integrales",
+    "areaServed": [
+      { "@type": "City", "name": "Aguascalientes" },
+      { "@type": "City", "name": "Jesús María" }
+    ],
+    "address": { "@type": "PostalAddress", "addressRegion": "Aguascalientes", "addressCountry": "MX" },
+    "makesOffer": [
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Fontanería" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Electricidad" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Pintura y detallado" } },
+      { "@type": "Offer", "itemOffered": { "@type": "Service", "name": "Impermeabilización" } }
+    ]
+  }
+  </script>
+</head>
+<body>
+  <a class="saltar" href="#contenido">Saltar al contenido</a>
+
+  <header class="encabezado" id="encabezado">
+    <div class="contenedor encabezado__fila">
+      <a class="logo" href="index.html" aria-label="Mantenimientos Integrales, ir al inicio">
+        <svg class="logo__icono" viewBox="0 0 32 32" aria-hidden="true"><use href="img/iconos.svg#i-casa"/></svg>
+        <span>Mantenimientos <strong>Integrales</strong></span>
+      </a>
+      <button class="menu-boton" id="menu-boton" aria-expanded="false" aria-controls="menu" aria-label="Abrir menú">
+        <span></span><span></span><span></span>
+      </button>
+      <nav class="menu" id="menu" aria-label="Principal">
+        <a href="index.html" aria-current="page">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="trabajos.html">Trabajos</a>
+        <a class="boton boton--chico" href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+    <div class="tubo-linea" aria-hidden="true"></div>
+  </header>
+
+  <main id="contenido">
+    <!-- ===== Portada con red de tuberías ===== -->
+    <section class="portada oscuro" aria-labelledby="titulo-portada">
+      <canvas class="burbujas" id="burbujas" aria-hidden="true"></canvas>
+      <button class="pausa" id="pausa" type="button" aria-label="Pausar las burbujas" hidden>❚❚</button>
+      <div class="contenedor">
+        <div class="portada__texto aparecer">
+          <p class="etiqueta">Aguascalientes · Jesús María</p>
+          <h1 id="titulo-portada"><span class="resalte">Agua</span> y <span class="resalte-luz">luz</span>, en buenas manos.</h1>
+          <p class="portada__lema">Especialistas en <strong>fontanería</strong> y <strong>electricidad</strong>. También hacemos pintura e impermeabilización. Mándanos fotos de lo que necesitas y te cotizamos.</p>
+          <div class="portada__acciones">
+            <a class="boton boton--whatsapp" data-wa="Hola, vi su página y me gustaría una cotización." href="contacto.html" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="img/iconos.svg#i-whatsapp"/></svg>
+              Cotizar por WhatsApp
+            </a>
+          </div>
+        </div>
+
+        <nav class="hub" aria-label="Explora la página">
+          <button class="llave" id="llave" type="button" aria-label="Cerrar la llave del agua" title="Psst… pruébala">
+            <svg viewBox="0 0 80 80" aria-hidden="true">
+              <defs>
+                <linearGradient id="acero-llave" x1="0" y1="0" x2="1" y2="1">
+                  <stop offset="0" stop-color="#c7d6e6"/><stop offset="0.5" stop-color="#4d6f93"/><stop offset="1" stop-color="#1b3550"/>
+                </linearGradient>
+              </defs>
+              <g class="llave__giro">
+                <g class="llave__volante">
+                  <circle cx="40" cy="40" r="31" fill="none" stroke="url(#acero-llave)" stroke-width="8"/>
+                  <path d="M40 10v60M10 40h60" stroke="url(#acero-llave)" stroke-width="6" stroke-linecap="round"/>
+                  <circle cx="40" cy="40" r="10" fill="#0ea5e9" stroke="#0f2a44" stroke-width="3"/>
+                  <circle cx="37" cy="37" r="3" fill="#bae6fd"/>
+                </g>
+              </g>
+            </svg>
+          </button>
+          <div class="tubo tubo--v hub__entrada con-junta" aria-hidden="true"></div>
+          <div class="hub__colector" aria-hidden="true">
+            <div class="tubo tubo--h tubo--hacia-izq"></div>
+            <div class="tubo tubo--h tubo--hacia-der"></div>
+          </div>
+          <ul class="hub__salidas">
+            <li class="hub__salida">
+              <div class="tubo tubo--v hub__bajada con-junta" aria-hidden="true"></div>
+              <div class="tubo tubo--h hub__rama" aria-hidden="true"></div>
+              <a class="salida" href="servicios.html">
+                <span class="salida__icono"><svg aria-hidden="true"><use href="img/iconos.svg#i-llave"/></svg></span>
+                <span class="salida__titulo">Servicios</span>
+                <span class="salida__texto">Fontanería y electricidad, además de pintura e impermeabilización.</span>
+                <span class="salida__ir">Ver servicios <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li class="hub__salida">
+              <div class="tubo tubo--v hub__bajada con-junta" aria-hidden="true"></div>
+              <div class="tubo tubo--h hub__rama" aria-hidden="true"></div>
+              <a class="salida" href="trabajos.html">
+                <span class="salida__icono"><svg aria-hidden="true"><use href="img/iconos.svg#i-camara"/></svg></span>
+                <span class="salida__titulo">Trabajos</span>
+                <span class="salida__texto">Fotos de trabajos que ya hemos realizado.</span>
+                <span class="salida__ir">Ver trabajos <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+            <li class="hub__salida">
+              <div class="tubo tubo--v hub__bajada con-junta" aria-hidden="true"></div>
+              <div class="tubo tubo--h hub__rama" aria-hidden="true"></div>
+              <a class="salida" href="contacto.html">
+                <span class="salida__icono"><svg aria-hidden="true"><use href="img/iconos.svg#i-mensaje"/></svg></span>
+                <span class="salida__titulo">Contacto</span>
+                <span class="salida__texto">WhatsApp, teléfono y zona de servicio.</span>
+                <span class="salida__ir">Contactar <span aria-hidden="true">→</span></span>
+              </a>
+            </li>
+          </ul>
+        </nav>
+      </div>
+    </section>
+
+    <!-- ===== Especialidades: agua y luz ===== -->
+    <section class="seccion" aria-labelledby="titulo-especialidades">
+      <div class="contenedor">
+        <header class="seccion__cabeza aparecer">
+          <p class="etiqueta">Nuestras especialidades</p>
+          <h2 id="titulo-especialidades">Agua y luz: lo que mejor sabemos hacer</h2>
+          <p>La fontanería y la electricidad son el corazón de nuestro trabajo.</p>
+        </header>
+
+        <div class="especialidades">
+          <article class="especialidad especialidad--agua oscuro aparecer">
+            <div class="especialidad__arte" aria-hidden="true">
+              <svg class="grifo" viewBox="0 0 160 120">
+                <defs>
+                  <linearGradient id="acero-grifo" x1="0" y1="0" x2="0" y2="1">
+                    <stop offset="0" stop-color="#c7d6e6"/><stop offset="0.55" stop-color="#4d6f93"/><stop offset="1" stop-color="#1b3550"/>
+                  </linearGradient>
+                </defs>
+                <path d="M6 46h64a16 16 0 0 1 16 16v8" fill="none" stroke="url(#acero-grifo)" stroke-width="14" stroke-linecap="round"/>
+                <rect x="30" y="22" width="22" height="18" rx="3" fill="url(#acero-grifo)"/>
+                <rect x="18" y="14" width="46" height="9" rx="4.5" fill="url(#acero-grifo)"/>
+                <path class="gota" d="M86 78s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Z" fill="#38bdf8"/>
+                <path class="gota gota--2" d="M86 78s-6 7-6 11a6 6 0 0 0 12 0c0-4-6-11-6-11Z" fill="#38bdf8"/>
+                <ellipse class="charco" cx="86" cy="114" rx="22" ry="4" fill="#0ea5e9" opacity="0.5"/>
+              </svg>
+            </div>
+            <p class="especialidad__sello"><svg aria-hidden="true"><use href="img/iconos.svg#i-gota"/></svg> Especialidad</p>
+            <h3>Fontanería</h3>
+            <p>Fugas, tuberías, llaves y mezcladoras, baños, cocinas y tinacos. Reparación e instalación.</p>
+            <a class="boton boton--whatsapp" data-wa="Hola, me interesa el servicio de fontanería." href="contacto.html" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="img/iconos.svg#i-whatsapp"/></svg> Cotizar fontanería
+            </a>
+          </article>
+
+          <article class="especialidad especialidad--luz oscuro aparecer">
+            <div class="especialidad__arte">
+              <svg class="cable" viewBox="0 0 100 40" preserveAspectRatio="none" aria-hidden="true">
+                <path class="cable__forro" d="M0 8 C 30 8, 40 32, 70 26 S 92 20, 100 20" fill="none" vector-effect="non-scaling-stroke"/>
+                <path class="cable__chispa" d="M0 8 C 30 8, 40 32, 70 26 S 92 20, 100 20" fill="none" vector-effect="non-scaling-stroke"/>
+              </svg>
+              <button class="foco" id="foco" type="button" aria-label="Apagar la luz" title="¿Y si…?">
+                <svg viewBox="0 0 92 60" aria-hidden="true">
+                  <rect class="foco__rosca" x="2" y="19" width="22" height="22" rx="3"/>
+                  <path d="M8 19v22M14 19v22M20 19v22" stroke="#0f2a44" stroke-width="1.5" opacity="0.5"/>
+                  <path class="foco__vidrio" d="M24 22 L36 20 A24 24 0 1 1 36 40 L24 38 Z"/>
+                  <path class="foco__filamento" d="M32 30h10l4-5 4 10 4-10 4 10 4-5" fill="none" stroke-width="2" stroke-linejoin="round"/>
+                </svg>
+              </button>
+            </div>
+            <p class="especialidad__sello especialidad__sello--luz"><svg aria-hidden="true"><use href="img/iconos.svg#i-rayo"/></svg> Especialidad</p>
+            <h3>Electricidad</h3>
+            <p>Contactos, apagadores, lámparas, cableado y revisión de fallas eléctricas.</p>
+            <a class="boton boton--whatsapp" data-wa="Hola, me interesa el servicio de electricidad." href="contacto.html" target="_blank" rel="noopener">
+              <svg aria-hidden="true"><use href="img/iconos.svg#i-whatsapp"/></svg> Cotizar electricidad
+            </a>
+          </article>
+        </div>
+
+        <div class="tambien aparecer">
+          <p>También hacemos:</p>
+          <a class="chip" href="servicios.html#pintura"><svg aria-hidden="true"><use href="img/iconos.svg#i-rodillo"/></svg> Pintura y detallado</a>
+          <a class="chip" href="servicios.html#impermeabilizacion"><svg aria-hidden="true"><use href="img/iconos.svg#i-escudo"/></svg> Impermeabilización</a>
+        </div>
+      </div>
+    </section>
+
+    <!-- ===== Cómo trabajamos ===== -->
+    <section class="seccion seccion--suave" aria-labelledby="titulo-proceso">
+      <div class="contenedor">
+        <header class="seccion__cabeza aparecer">
+          <p class="etiqueta">Cómo trabajamos</p>
+          <h2 id="titulo-proceso">Tres pasos y listo</h2>
+        </header>
+        <ol class="pasos">
+          <li class="paso aparecer">
+            <span class="paso__numero" aria-hidden="true">1</span>
+            <h3>Escríbenos</h3>
+            <p>Cuéntanos por WhatsApp qué necesitas. Si puedes, manda fotos.</p>
+          </li>
+          <li class="paso aparecer">
+            <span class="paso__numero" aria-hidden="true">2</span>
+            <h3>Te cotizamos</h3>
+            <p>Revisamos el trabajo y te damos un precio claro antes de empezar.</p>
+          </li>
+          <li class="paso aparecer">
+            <span class="paso__numero" aria-hidden="true">3</span>
+            <h3>Lo resolvemos</h3>
+            <p>Hacemos el trabajo en la fecha acordada y revisamos contigo el resultado.</p>
+          </li>
+        </ol>
+      </div>
+    </section>
+
+    <!-- ===== Zona ===== -->
+    <section class="seccion" aria-labelledby="titulo-zona">
+      <div class="contenedor zona aparecer">
+        <div class="zona__icono"><svg aria-hidden="true"><use href="img/iconos.svg#i-pin"/></svg></div>
+        <div>
+          <p class="etiqueta">Zona de servicio</p>
+          <h2 id="titulo-zona">Aguascalientes y Jesús María</h2>
+          <p>¿Estás en otra zona cercana? Escríbenos y lo platicamos.</p>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="pie">
+    <div class="tubo-linea" aria-hidden="true"></div>
+    <div class="cable-linea" aria-hidden="true"></div>
+    <div class="contenedor pie__fila">
+      <p>© <span id="anio">2026</span> Mantenimientos Integrales · Aguascalientes, México</p>
+      <nav aria-label="Pie de página">
+        <a href="index.html">Inicio</a>
+        <a href="servicios.html">Servicios</a>
+        <a href="trabajos.html">Trabajos</a>
+        <a href="contacto.html">Contacto</a>
+      </nav>
+    </div>
+  </footer>
+
+  <a class="flotante" data-wa="Hola, vi su página y me gustaría una cotización." href="contacto.html" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
+    <svg aria-hidden="true"><use href="img/iconos.svg#i-whatsapp"/></svg>
+  </a>
+
+  <script src="js/main.js"></script>
+  <script src="js/efectos.js"></script>
+</body>
+</html>
