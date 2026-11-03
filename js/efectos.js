@@ -153,6 +153,99 @@ document.addEventListener("pointermove", (e) => {
   raiz.classList.toggle("sobre-patito", !!patitoTocado(e));
 }, { passive: true });
 
+// ===== Capi: el capibara ayudante de obra, junto al botón de WhatsApp =====
+const capi = document.createElement("button");
+capi.type = "button";
+capi.className = "capi";
+capi.setAttribute("aria-label", "Capi, el capibara ayudante");
+capi.innerHTML = `
+  <span class="capi__globo" aria-hidden="true">¿Te ayudo? Escríbenos 👉</span>
+  <svg viewBox="0 0 100 120" aria-hidden="true">
+    <!-- patitas: Capi está de pie -->
+    <rect x="29" y="98" width="13" height="16" rx="6" fill="#b87d52"/>
+    <rect x="58" y="98" width="13" height="16" rx="6" fill="#b87d52"/>
+    <ellipse cx="35" cy="114" rx="9" ry="4.5" fill="#a8764e"/>
+    <ellipse cx="65" cy="114" rx="9" ry="4.5" fill="#a8764e"/>
+    <circle cx="31" cy="114" r="1.6" fill="#f9a8d4"/><circle cx="35.5" cy="112.5" r="1.6" fill="#f9a8d4"/><circle cx="40" cy="114" r="1.6" fill="#f9a8d4"/>
+    <circle cx="60" cy="114" r="1.6" fill="#f9a8d4"/><circle cx="64.5" cy="112.5" r="1.6" fill="#f9a8d4"/><circle cx="69" cy="114" r="1.6" fill="#f9a8d4"/>
+    <!-- cuerpo de barrilito -->
+    <path d="M25 102c-7-15-7-33 0-46 6-12 16-17 25-17s19 5 25 17c7 13 7 31 0 46-9 6-41 6-50 0Z" fill="#c98f62"/>
+    <ellipse cx="50" cy="86" rx="16" ry="19" fill="#dcae86"/>
+    <ellipse cx="25" cy="72" rx="6" ry="13" fill="#b87d52" transform="rotate(10 25 72)"/>
+    <ellipse cx="75" cy="72" rx="6" ry="13" fill="#b87d52" transform="rotate(-10 75 72)"/>
+    <!-- cinturón con pinzas y rodillo -->
+    <rect x="22" y="88" width="56" height="8" rx="3" fill="#5b3a21"/>
+    <rect x="45" y="87" width="10" height="10" rx="2" fill="#fbbf24"/>
+    <rect x="47.5" y="89.5" width="5" height="5" rx="1" fill="#5b3a21"/>
+    <rect x="24" y="94" width="13" height="12" rx="3" fill="#7c4a26"/>
+    <path d="M28 94l-3-14M33 94l3-14" stroke="#ef4444" stroke-width="3.2" stroke-linecap="round"/>
+    <path d="M25 80l2.5-6 2.5 6M36 80l-2.5-6-2.5 6" fill="none" stroke="#94a3b8" stroke-width="2.4" stroke-linejoin="round"/>
+    <rect x="63" y="94" width="13" height="12" rx="3" fill="#7c4a26"/>
+    <path d="M70 94V82h6" fill="none" stroke="#94a3b8" stroke-width="2.4" stroke-linejoin="round"/>
+    <rect x="72" y="73" width="14" height="9" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+    <!-- cabeza grandota con hocico chato -->
+    <g class="capi__cabeza">
+      <circle cx="30" cy="20" r="6.5" fill="#b87d52"/><circle cx="30" cy="20" r="3.4" fill="#f9a8d4"/>
+      <circle cx="68" cy="18" r="7" fill="#b87d52"/><circle cx="68" cy="18" r="3.6" fill="#f9a8d4"/>
+      <path d="M80 38c0-14-10-22-28-22H32C17 16 8 25 8 38v4c0 13 9 21 23 21h27c14 0 22-9 22-25Z" fill="#c98f62"/>
+      <ellipse cx="24" cy="46" rx="16" ry="13" fill="#d8a77a"/>
+      <ellipse cx="14" cy="39" rx="2.4" ry="1.7" fill="#5b3a21"/>
+      <ellipse cx="24" cy="37.5" rx="2.4" ry="1.7" fill="#5b3a21"/>
+      <path d="M15 51q5 3.5 10 0" fill="none" stroke="#5b3a21" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M10 45l-6-1.5M10 48.5l-6 1.5" stroke="#7c4a26" stroke-width="0.9" stroke-linecap="round" opacity="0.6"/>
+      <ellipse cx="64" cy="48" rx="7" ry="4.5" fill="#fb7185" opacity="0.4"/>
+      <g class="capi__ojos"><circle cx="42" cy="33" r="2.6" fill="#1f130a"/><circle cx="62" cy="31" r="2.6" fill="#1f130a"/><circle cx="43" cy="32" r="0.9" fill="#fff"/><circle cx="63" cy="30" r="0.9" fill="#fff"/></g>
+      <!-- lentes de sol -->
+      <g class="capi__lentes">
+        <path d="M32 26h18l-2 11c-1 3-4 4-7 4h-2c-4 0-7-3-7-6Z" fill="#0f172a"/>
+        <path d="M53 25h20l-2 11c-1 3-4 4-7 4h-3c-4 0-7-3-7-6Z" fill="#0f172a"/>
+        <path d="M50 28h3M73 25l7-3" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M36 37l8-9M40 38l6-7M58 36l8-9M62 37l6-7" stroke="#38bdf8" stroke-width="2" stroke-linecap="round" opacity="0.85"/>
+      </g>
+      <!-- casco de constructor -->
+      <g class="capi__casco">
+        <path d="M24 20c2-12 13-18 26-18s24 6 26 17Z" fill="#facc15"/>
+        <path d="M50 2.5v16" stroke="#eab308" stroke-width="4"/>
+        <rect x="18" y="17" width="64" height="6" rx="3" fill="#eab308"/>
+        <path d="M30 10q6-5 12-6" fill="none" stroke="#fef9c3" stroke-width="2.5" stroke-linecap="round"/>
+      </g>
+    </g>
+  </svg>`;
+document.body.append(capi);
+const DICHOS_CAPI = rotar([
+  "👷 ¡Hola! Soy Capi, el ayudante de la obra. 😎",
+  "👉 ¿Fuga, apagón o pared sin pintar? Escríbenos por WhatsApp aquí al lado.",
+  "🔧 Consejo de Capi: revisa tus llaves y mezcladoras; si gotean, mejor arreglarlas pronto.",
+  "😌 Los capibaras somos tranquilos… como tu casa después de que la arreglamos.",
+  "⚡ Consejo de Capi: si un apagador hace chispa o se siente caliente, no lo uses y avísanos.",
+  "⛑️ Mi casco es de verdad: en la obra, la seguridad primero.",
+  "🎨 Consejo de Capi: antes de pintar, hay que resanar y limpiar la pared. Así queda pareja.",
+  "🧰 En mi cinturón traigo pinzas de electricista y rodillo. ¿Qué arreglamos hoy?",
+  "☔ Consejo de Capi: limpia tu azotea y las bajadas de agua antes de que lleguen las lluvias.",
+  "🦆 Psst… en el agua de la página hay patitos escondidos.",
+  "😎 ¿Ya viste que me bajo los lentes? Pasa el mouse sobre mí.",
+]);
+capi.addEventListener("click", () => {
+  capi.classList.remove("saluda");
+  void capi.offsetWidth;
+  capi.classList.add("saluda");
+  clearTimeout(capi.tiempo);
+  capi.tiempo = setTimeout(() => capi.classList.remove("saluda"), 1800); // se vuelve a poner los lentes
+  capi.querySelector(".capi__globo").classList.remove("visible");
+  avisar(DICHOS_CAPI());
+});
+// Una vez por visita, Capi ofrece ayuda con un globito
+let capiYaSaludo = false;
+try { capiYaSaludo = sessionStorage.getItem("capi-saludo") === "1"; } catch {}
+if (!capiYaSaludo) {
+  const globo = capi.querySelector(".capi__globo");
+  setTimeout(() => {
+    globo.classList.add("visible");
+    try { sessionStorage.setItem("capi-saludo", "1"); } catch {}
+    setTimeout(() => globo.classList.remove("visible"), 7000);
+  }, 4000);
+}
+
 // ===== Chorro: cae del tubo de la cabecera hasta la superficie del agua =====
 const tuboCabecera = document.querySelector(".cabecera-pagina .tubo--h");
 const chorro = tuboCabecera && !reducirMovimiento ? document.createElement("div") : null;

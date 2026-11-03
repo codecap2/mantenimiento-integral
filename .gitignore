@@ -9,3 +9,6 @@ img/trabajos/*
 Thumbs.db
 desktop.ini
 .DS_Store
+
+# Materiales para imprimir (el QR de WhatsApp lleva el número): no se publican
+materiales/
