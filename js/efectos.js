@@ -29,13 +29,50 @@ aguaFondo.setAttribute("aria-hidden", "true");
 aguaFondo.innerHTML = "<span></span>".repeat(8);
 document.body.prepend(aguaFondo);
 
+// ===== Patito de hule: flota en la superficie y dice cuac =====
+const patito = document.createElement("button");
+patito.type = "button";
+patito.className = "patito";
+patito.setAttribute("aria-label", "Patito de hule");
+patito.innerHTML = `
+  <svg viewBox="0 0 64 56" aria-hidden="true">
+    <path d="M6 32c4 2 8 2 12 0 0 10 8 18 22 18 12 0 20-6 20-15 0-6-4-10-10-12 3-2 5-5 5-9A11 11 0 0 0 44 3c-7 0-11 5-11 11 0 3 1 5 2 7-4-1-8-1-12 0C16 22 10 26 6 32Z" fill="#fbbf24"/>
+    <path d="M24 30c6 6 15 6 22 1-2 8-9 11-15 10-5-1-8-5-7-11Z" fill="#f59e0b"/>
+    <path d="M54 12c4 0 8 1 9 3-2 3-6 4-10 3" fill="#f97316"/>
+    <circle cx="46" cy="10" r="2.4" fill="#0f2a44"/>
+    <circle cx="46.8" cy="9.2" r="0.8" fill="#fff"/>
+  </svg>`;
+document.body.append(patito);
+const cuacs = [
+  "¡Cuac! 🦆",
+  "¡Cuac! Aquí el agua va por donde debe. 💧",
+  "¡Cuac cuac! Ni una fuga a la vista. 🔧",
+  "🦆 Psst… prueba tocar el foco. ⚡",
+  "¡Cuac! ¿Ya cotizaste por WhatsApp? 😉",
+];
+let cuacActual = 0;
+const ZONAS_OSCURAS = ".portada, .cabecera-pagina, .llamado, .pie, .especialidad, .tarjeta--principal, .encabezado";
+function revisarPatito() {
+  const r = patito.getBoundingClientRect();
+  const debajo = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height * 0.75).find((el) => el !== patito && !patito.contains(el));
+  patito.classList.toggle("oculto", !!(debajo && debajo.closest(ZONAS_OSCURAS)));
+}
+setInterval(revisarPatito, 800); // también nada solo, así que se revisa seguido
+patito.addEventListener("click", () => {
+  patito.classList.remove("cuac");
+  void patito.offsetWidth; // reinicia la animación del salto
+  patito.classList.add("cuac");
+  avisar(cuacs[cuacActual++ % cuacs.length]);
+});
+
 // ===== El agua corre al bajar por la página =====
 let pendiente = false;
 function alBajar() {
   const maximo = Math.max(1, raiz.scrollHeight - window.innerHeight);
   const avance = Math.min(1, window.scrollY / maximo);
   raiz.style.setProperty("--flujo", (window.scrollY * 0.6).toFixed(1));
-  raiz.style.setProperty("--nivel", reducirMovimiento ? "0.35" : (0.1 + avance * 0.9).toFixed(3));
+  raiz.style.setProperty("--nivel", reducirMovimiento ? "0.4" : (0.22 + avance * 0.78).toFixed(3));
+  revisarPatito();
   pendiente = false;
 }
 window.addEventListener("scroll", () => {

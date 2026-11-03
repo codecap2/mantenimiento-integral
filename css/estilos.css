@@ -17,7 +17,7 @@
   --color-whatsapp: #0e7a4b;       /* verde con buen contraste para texto blanco */
   --color-whatsapp-hover: #0b633d;
   --color-texto: #1c2733;
-  --color-texto-suave: #4f5d6b;
+  --color-texto-suave: #384655;     /* bastante oscuro para leerse también sobre el agua */
   --color-fondo: #ffffff;
   --color-fondo-suave: #f2f6fa;
   --color-borde: #dde3ea;
@@ -190,7 +190,8 @@ a { color: inherit; }
 
 /* Pausa global: detiene lo que se mueve solo */
 .quieto .tubo-linea::after, .quieto .cable-linea::after,
-.quieto .agua-fondo::before, .quieto .agua-fondo span { animation-play-state: paused !important; }
+.quieto .agua-fondo::before, .quieto .agua-fondo::after, .quieto .agua-fondo span,
+.quieto .patito, .quieto .patito svg { animation-play-state: paused !important; }
 .pausa-global {
   min-height: 40px; padding: 0.4rem 0.9rem; font: 500 0.85rem/1 var(--fuente-texto);
   color: rgb(255 255 255 / 0.85); background: rgb(255 255 255 / 0.06);
@@ -202,19 +203,47 @@ a { color: inherit; }
 /* ===== Agua de fondo: sube conforme bajas por la página ===== */
 .agua-fondo {
   position: fixed; left: 0; right: 0; bottom: 0; height: 100vh; z-index: -1; pointer-events: none;
-  background: linear-gradient(180deg, #e0f2fe 0%, #cdeefe 100%);
-  transform: translateY(calc((1 - var(--nivel, 0.1)) * 100%));
+  background:
+    repeating-linear-gradient(105deg, transparent 0 80px, rgb(255 255 255 / 0.12) 80px 120px, transparent 120px 260px),
+    linear-gradient(180deg, #b9e6fd 0%, #93dbfb 45%, #7dd3fc 100%);
+  transform: translateY(calc((1 - var(--nivel, 0.25)) * 100%));
+  transition: transform 250ms ease-out;
+}
+/* Dos capas de olas: la de atrás más oscura y en sentido contrario */
+.agua-fondo::before, .agua-fondo::after {
+  content: ""; position: absolute; left: 0; right: 0; background-repeat: repeat-x;
 }
 .agua-fondo::before {
-  /* olas en la superficie */
-  content: ""; position: absolute; left: 0; right: 0; top: -17px; height: 18px;
-  background: radial-gradient(circle at 30px 30px, #e0f2fe 27px, transparent 28px) repeat-x;
-  background-size: 60px 18px; animation: ola-fondo 5s linear infinite;
+  top: -27px; height: 28px; z-index: 1;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 120 28' preserveAspectRatio='none'%3E%3Cpath d='M0 14 Q30 0 60 14 T120 14 V28 H0Z' fill='%23b9e6fd'/%3E%3C/svg%3E");
+  background-size: 120px 28px; animation: ola-fondo 6s linear infinite;
 }
-@keyframes ola-fondo { to { background-position: 60px 0; } }
+.agua-fondo::after {
+  top: -42px; height: 42px;
+  background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 180 42' preserveAspectRatio='none'%3E%3Cpath d='M0 21 Q45 0 90 21 T180 21 V42 H0Z' fill='%2338bdf8' fill-opacity='0.6'/%3E%3C/svg%3E");
+  background-size: 180px 42px; animation: ola-fondo-atras 9s linear infinite;
+}
+@keyframes ola-fondo { from { background-position: 0 0; } to { background-position: 360px 0; } }
+@keyframes ola-fondo-atras { from { background-position: 0 0; } to { background-position: -360px 0; } }
+
+/* Patito de hule que flota en la superficie del agua */
+.patito {
+  position: fixed; z-index: 45; left: 4vw; bottom: min(calc(var(--nivel, 0.25) * 100vh - 22px), calc(100vh - 160px));
+  width: 56px; height: 50px; padding: 0; border: 0; background: none; cursor: pointer;
+  transition: bottom 250ms ease-out, opacity 300ms ease;
+  animation: deriva 28s ease-in-out infinite alternate;
+}
+.patito svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 4px 4px rgb(3 105 161 / 0.35)); animation: flotar 3.2s ease-in-out infinite; transform-origin: 50% 80%; }
+.patito.cuac svg { animation: cuac 600ms ease-out; }
+@keyframes flotar { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-5px) rotate(5deg); } }
+@keyframes deriva { from { translate: 0 0; } to { translate: min(22vw, 260px) 0; } }
+@keyframes cuac { 0% { transform: translateY(0) scale(1); } 35% { transform: translateY(-26px) scale(1.12) rotate(-10deg); } 70% { transform: translateY(0) scale(0.95); } 100% { transform: translateY(0) scale(1); } }
+.sin-luz .patito { opacity: 0.25; }
+/* Sobre las zonas oscuras no se ve el agua, así que el patito se esconde */
+.patito.oculto { opacity: 0; pointer-events: none; }
 .agua-fondo span {
   position: absolute; bottom: -20px; width: 10px; height: 10px; border-radius: 50%;
-  border: 1.5px solid rgb(3 105 161 / 0.25); animation: sube-burbuja 9s linear infinite;
+  border: 1.5px solid rgb(255 255 255 / 0.7); animation: sube-burbuja 9s linear infinite;
 }
 .agua-fondo span:nth-child(1) { left: 6%; animation-delay: 0s; }
 .agua-fondo span:nth-child(2) { left: 18%; width: 6px; height: 6px; animation-delay: 3s; animation-duration: 11s; }
@@ -391,7 +420,7 @@ a { color: inherit; }
 
 /* ===== Secciones ===== */
 .seccion { padding-block: var(--espacio-5); }
-.seccion--suave { background: rgb(242 246 250 / 0.55); }
+.seccion--suave { background: rgb(255 255 255 / 0.22); }
 .seccion__cabeza { max-width: 40rem; margin-bottom: var(--espacio-4); }
 
 /* Servicios (página de servicios) */
@@ -518,8 +547,45 @@ a { color: inherit; }
 /* Galería (con "skeleton" mientras cargan las fotos) */
 .galeria { display: grid; gap: var(--espacio-2); grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); }
 .galeria figure { margin: 0; overflow: hidden; border-radius: var(--radio); background: var(--color-fondo-suave); }
-.galeria .foto { position: relative; aspect-ratio: 4 / 3; }
-.galeria .foto img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 400ms ease; }
+.galeria figure { box-shadow: var(--sombra); background: var(--color-fondo); }
+.galeria .foto { position: relative; display: block; width: 100%; aspect-ratio: 4 / 3; padding: 0; border: 0; background: var(--color-fondo-suave); cursor: zoom-in; overflow: hidden; }
+.galeria .foto img { width: 100%; height: 100%; object-fit: cover; opacity: 0; transition: opacity 400ms ease, transform 500ms ease; }
+.galeria .foto:hover img { transform: scale(1.05); }
+.galeria figcaption { display: flex; flex-direction: column; gap: 0.25rem; color: var(--color-texto); font-weight: 500; }
+.galeria__tipo { font-size: 0.75rem; font-weight: 700; letter-spacing: 0.06em; text-transform: uppercase; color: var(--color-agua-texto); }
+.galeria__tipo--electricidad { color: var(--color-luz-texto); }
+.galeria__tipo--pintura, .galeria__tipo--impermeabilizacion { color: var(--color-texto-suave); }
+.galeria--muestra { grid-template-columns: repeat(auto-fill, minmax(min(100%, 220px), 1fr)); }
+.seccion__cabeza--fila { display: flex; flex-wrap: wrap; align-items: flex-end; justify-content: space-between; gap: var(--espacio-2); max-width: none; }
+.seccion__cabeza--fila h2 { margin-bottom: 0; }
+
+/* Filtros de la galería */
+.filtros { display: flex; flex-wrap: wrap; gap: var(--espacio-1); margin-bottom: var(--espacio-3); }
+.filtros button {
+  min-height: 44px; padding: 0.5rem 1.1rem; font: 600 0.95rem/1 var(--fuente-texto); color: var(--color-marino);
+  background: rgb(255 255 255 / 0.8); border: 1px solid var(--color-borde); border-radius: 999px; cursor: pointer;
+  transition: background var(--transicion), color var(--transicion), border-color var(--transicion);
+}
+.filtros button:hover { border-color: var(--color-agua-texto); }
+.filtros button[aria-pressed="true"] { color: var(--color-blanco); background: var(--color-marino); border-color: var(--color-marino); }
+
+/* Visor de fotos */
+.visor { width: min(96vw, 1100px); max-height: 94vh; padding: 0; border: 0; border-radius: var(--radio); background: var(--color-marino-3); color: var(--color-blanco); overflow: visible; }
+.visor::backdrop { background: rgb(2 8 16 / 0.85); backdrop-filter: blur(4px); }
+.visor figure { margin: 0; }
+.visor img { width: 100%; max-height: 80vh; object-fit: contain; border-radius: var(--radio) var(--radio) 0 0; background: #050b12; opacity: 0; transition: opacity 250ms; }
+.visor img.cargada { opacity: 1; }
+.visor figcaption { padding: 0.9rem 1.2rem; font-weight: 500; }
+.visor button {
+  position: absolute; display: grid; place-items: center; width: 48px; height: 48px; padding: 0;
+  font-size: 1.3rem; color: var(--color-blanco); background: rgb(15 42 68 / 0.85);
+  border: 1px solid rgb(255 255 255 / 0.25); border-radius: 50%; cursor: pointer;
+}
+.visor button:hover { background: var(--color-marino-2); }
+.visor { --color-foco: var(--color-agua); }
+.visor__cerrar { top: 0.75rem; right: 0.75rem; }
+.visor__anterior { left: 0.75rem; top: 40%; }
+.visor__siguiente { right: 0.75rem; top: 40%; }
 .galeria .foto img.cargada { opacity: 1; }
 .galeria .foto:has(img:not(.cargada))::before {
   content: ""; position: absolute; inset: 0;
@@ -568,7 +634,7 @@ a { color: inherit; }
 
 /* Botón flotante */
 .flotante {
-  position: fixed; right: 1rem; bottom: 1rem; z-index: 60;
+  position: fixed; right: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom)); z-index: 60;
   display: grid; place-items: center; width: 60px; height: 60px; border-radius: 50%;
   background: var(--color-whatsapp); color: var(--color-blanco); box-shadow: 0 8px 24px rgb(10 30 49 / 0.3);
   transition: transform var(--transicion), background var(--transicion);
@@ -600,12 +666,15 @@ a { color: inherit; }
 
 /* Avisos pequeños */
 .aviso {
-  position: fixed; left: 1rem; bottom: 1rem; z-index: 90; max-width: min(26rem, calc(100% - 6.5rem));
+  position: fixed; left: 1rem; bottom: calc(1rem + env(safe-area-inset-bottom)); z-index: 90; max-width: min(26rem, calc(100% - 6.5rem));
   padding: 0.8rem 1.1rem; color: var(--color-blanco); font-weight: 500; font-size: var(--texto-s);
   background: var(--color-marino); border: 1px solid rgb(56 189 248 / 0.4); border-radius: var(--radio);
-  box-shadow: var(--sombra-fuerte); transform: translateY(calc(100% + 2rem)); transition: transform 300ms ease;
+  box-shadow: var(--sombra-fuerte); cursor: pointer;
+  /* Escondido de verdad: en iPhone la barra de Safari es transparente y dejaba ver el aviso */
+  opacity: 0; visibility: hidden; transform: translateY(1rem);
+  transition: transform 300ms ease, opacity 300ms ease, visibility 0s linear 300ms;
 }
-.aviso.visible { transform: none; }
+.aviso.visible { opacity: 1; visibility: visible; transform: none; transition: transform 300ms ease, opacity 300ms ease, visibility 0s; }
 
 /* Easter egg: apagón (la luz de una linterna sigue al mouse) */
 .apagon {

@@ -1,6 +1,10 @@
 # Herramientas locales de Claude (no son parte de la página)
 .claude/
 
+# Fotos originales de trabajos: solo se publican las optimizadas de img/trabajos/web/
+img/trabajos/*
+!img/trabajos/web/
+
 # Archivos del sistema
 Thumbs.db
 desktop.ini

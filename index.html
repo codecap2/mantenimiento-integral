@@ -227,6 +227,20 @@
       </div>
     </section>
 
+    <!-- ===== Muestra de trabajos (la llena js/main.js) ===== -->
+    <section class="seccion seccion--suave" aria-labelledby="titulo-muestra" hidden>
+      <div class="contenedor">
+        <header class="seccion__cabeza seccion__cabeza--fila aparecer">
+          <div>
+            <p class="etiqueta">Trabajos realizados</p>
+            <h2 id="titulo-muestra">Nuestro trabajo habla por nosotros</h2>
+          </div>
+          <a class="boton" href="trabajos.html">Ver todos los trabajos <span aria-hidden="true">→</span></a>
+        </header>
+        <div class="galeria galeria--muestra" id="muestra"></div>
+      </div>
+    </section>
+
     <!-- ===== Cómo trabajamos ===== -->
     <section class="seccion seccion--suave" aria-labelledby="titulo-proceso">
       <div class="contenedor">
@@ -284,6 +298,17 @@
   <a class="flotante" data-wa="Hola, vi su página y me gustaría una cotización." href="contacto.html" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
     <svg aria-hidden="true"><use href="img/iconos.svg#i-whatsapp"/></svg>
   </a>
+
+  <!-- Visor de fotos en grande -->
+  <dialog class="visor" id="visor" aria-label="Foto de trabajo">
+    <figure>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+    <button class="visor__cerrar" type="button" aria-label="Cerrar">✕</button>
+    <button class="visor__anterior" type="button" aria-label="Foto anterior">←</button>
+    <button class="visor__siguiente" type="button" aria-label="Foto siguiente">→</button>
+  </dialog>
 
   <script src="js/main.js"></script>
   <script src="js/efectos.js"></script>

@@ -59,6 +59,13 @@
 
     <section class="seccion" aria-label="Galería de trabajos">
       <div class="contenedor">
+        <div class="filtros" id="filtros" role="group" aria-label="Filtrar por servicio" hidden>
+          <button type="button" data-filtro="todos" aria-pressed="true">Todos</button>
+          <button type="button" data-filtro="fontaneria" aria-pressed="false">💧 Fontanería</button>
+          <button type="button" data-filtro="electricidad" aria-pressed="false">⚡ Electricidad</button>
+          <button type="button" data-filtro="pintura" aria-pressed="false">Pintura</button>
+          <button type="button" data-filtro="impermeabilizacion" aria-pressed="false">Impermeabilización</button>
+        </div>
         <div class="galeria" id="galeria"></div>
 
         <div class="vacio aparecer" id="galeria-vacia">
@@ -90,6 +97,17 @@
   <a class="flotante" data-wa="Hola, vi su página y me gustaría una cotización." href="contacto.html" target="_blank" rel="noopener" aria-label="Escribir por WhatsApp">
     <svg aria-hidden="true"><use href="img/iconos.svg#i-whatsapp"/></svg>
   </a>
+
+  <!-- Visor de fotos en grande -->
+  <dialog class="visor" id="visor" aria-label="Foto de trabajo">
+    <figure>
+      <img alt="">
+      <figcaption></figcaption>
+    </figure>
+    <button class="visor__cerrar" type="button" aria-label="Cerrar">✕</button>
+    <button class="visor__anterior" type="button" aria-label="Foto anterior">←</button>
+    <button class="visor__siguiente" type="button" aria-label="Foto siguiente">→</button>
+  </dialog>
 
   <script src="js/main.js"></script>
   <script src="js/efectos.js"></script>
