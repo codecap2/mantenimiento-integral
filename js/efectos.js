@@ -73,11 +73,9 @@ aguaFondo.setAttribute("aria-hidden", "true");
 aguaFondo.innerHTML = "<span></span>".repeat(8);
 document.body.prepend(aguaFondo);
 
-// ===== Patito de hule: flota en la superficie y dice cuac =====
-// Vive dentro del agua de fondo: queda detrás del contenido y solo se asoma donde se ve el agua
-const patito = document.createElement("div");
-patito.className = "patito";
-patito.innerHTML = `
+// ===== Patitos de hule: flotan en la superficie y dicen cuac =====
+// Viven dentro del agua de fondo: quedan detrás del contenido y solo se asoman donde se ve el agua
+const DIBUJO_PATITO = `
   <svg viewBox="0 0 84 70" aria-hidden="true">
     <path d="M12 40c-6-2-9-8-6-13 4 2 8 6 12 9Z" fill="#facc15"/>
     <ellipse cx="38" cy="47" rx="30" ry="17" fill="#fde047"/>
@@ -91,37 +89,68 @@ patito.innerHTML = `
     <path class="patito__ojo-feliz" d="M57 21q4-5 8 0" fill="none" stroke="#0f2a44" stroke-width="2.2" stroke-linecap="round"/>
     <ellipse cx="62" cy="30" rx="3.5" ry="2.2" fill="#fb7185" opacity="0.45"/>
   </svg>`;
-aguaFondo.append(patito);
-// El patito alterna saludos, pistas de los secretos y consejos útiles de mantenimiento
-const cuacs = [
+
+// Mamá pato alterna saludos, pistas de los secretos y consejos de mantenimiento y seguridad
+const DICHOS_MAMA = [
   "¡Cuac! 🦆 Soy el patito de la casa. Tócame otra vez y te cuento secretos…",
   "🦆 Pista: el foco de Electricidad esconde algo. ⚡",
   "🦆 Consejo: si tu recibo de agua subió sin razón, puede haber una fuga escondida. 💧",
+  "🦆 Seguridad: nunca toques contactos ni aparatos con las manos mojadas. ⚡",
   "🦆 Pista: el rodillo de Pintura cambia de color. 🎨",
   "🦆 Consejo: si una pastilla eléctrica se bota seguido, no la fuerces. Puede ser una falla: escríbenos.",
   "🦆 Pista: dale 5 clics rápidos a la llave de la portada… si te atreves. 🔧",
+  "🦆 Seguridad: si hay agua cerca de cables o contactos, corta la luz antes de acercarte. 💧⚡",
   "🦆 Consejo: antes de la temporada de lluvias es el mejor momento para impermeabilizar. ☔",
   "🦆 Pista: escribe «agua» con el teclado en cualquier página. 🌊",
   "🦆 Consejo: pintar en días secos ayuda a que la pintura seque pareja y dure más.",
   "¡Cuac! ¿Ya cotizaste por WhatsApp? 😉",
 ];
-let cuacActual = 0;
-// Como está detrás del contenido, revisamos a mano si el clic cayó en la parte visible del patito
+// El patito bebé (solo en el inicio) es el experto en seguridad
+const DICHOS_BEBE = [
+  "¡Cuic! 🐤 Soy el patito bebé. Yo me sé los consejos de seguridad…",
+  "🐤 Seguridad: antes de cambiar un apagador o una lámpara, baja la pastilla. 🔌",
+  "🐤 Seguridad: si un contacto se calienta, huele a quemado o echa chispas, deja de usarlo y escríbenos.",
+  "🐤 Seguridad: no conectes muchos aparatos en una sola extensión. 🔥",
+  "🐤 Seguridad: nunca toques contactos ni aparatos con las manos mojadas. ⚡",
+  "🐤 Seguridad: al pintar, ventila bien el cuarto y sal a tomar aire de vez en cuando. 🎨",
+  "🐤 Seguridad: para subir al techo, usa una escalera firme y que alguien te la sostenga. 🪜",
+  "🐤 Seguridad: si se te mete el agua por una fuga grande, cierra la llave de paso general. 🔧",
+  "¡Cuic cuic! Mamá pato dice que te portes bien. 🦆💛",
+];
+
+function crearPatito(clase, dichos) {
+  const el = document.createElement("div");
+  el.className = `patito ${clase}`;
+  el.innerHTML = DIBUJO_PATITO;
+  el.dichos = rotar(dichos);
+  aguaFondo.append(el);
+  return el;
+}
+const patitos = [crearPatito("patito--mama", DICHOS_MAMA)];
+if (document.querySelector(".portada")) {
+  aguaFondo.classList.add("con-bebe");
+  patitos.push(crearPatito("patito--bebe", DICHOS_BEBE));
+}
+
+// Como están detrás del contenido, revisamos a mano si el clic cayó en la parte visible de un patito
 const INTERACTIVOS = "a, button, input, textarea, select, dialog, figure, .servicio, .paso, .extra, .tarjeta, .salida, .especialidad, .portada, .cabecera-pagina, .llamado, .pie, .encabezado";
-function tocaPatito(e) {
-  const r = patito.getBoundingClientRect();
-  const dentro = e.clientX >= r.left + 6 && e.clientX <= r.right - 6 && e.clientY >= r.top + 4 && e.clientY <= r.bottom - 10;
-  return dentro && !e.target.closest(INTERACTIVOS);
+function patitoTocado(e) {
+  if (e.target.closest(INTERACTIVOS)) return null;
+  return patitos.find((p) => {
+    const r = p.getBoundingClientRect();
+    return e.clientX >= r.left + 4 && e.clientX <= r.right - 4 && e.clientY >= r.top + 4 && e.clientY <= r.bottom - 8;
+  }) || null;
 }
 document.addEventListener("click", (e) => {
-  if (!tocaPatito(e)) return;
-  patito.classList.remove("cuac");
-  void patito.offsetWidth; // reinicia la animación del salto
-  patito.classList.add("cuac");
-  avisar(cuacs[cuacActual++ % cuacs.length]);
+  const p = patitoTocado(e);
+  if (!p) return;
+  p.classList.remove("cuac");
+  void p.offsetWidth; // reinicia la animación del salto
+  p.classList.add("cuac");
+  avisar(p.dichos());
 });
 document.addEventListener("pointermove", (e) => {
-  raiz.classList.toggle("sobre-patito", tocaPatito(e));
+  raiz.classList.toggle("sobre-patito", !!patitoTocado(e));
 }, { passive: true });
 
 // ===== Chorro: cae del tubo de la cabecera hasta la superficie del agua =====

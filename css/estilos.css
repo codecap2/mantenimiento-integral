@@ -236,6 +236,10 @@ a { color: inherit; }
 }
 .patito svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 3px rgb(3 105 161 / 0.3)); animation: flotar 3.2s ease-in-out infinite; transform-origin: 50% 85%; }
 .patito__ojo-feliz { display: none; }
+/* En el inicio, mamá pato va adelante y el bebé la sigue */
+.con-bebe .patito--mama { left: calc(5vw + 54px); }
+.patito--bebe { width: 44px; height: 37px; top: -36px; }
+.patito--bebe svg { animation-delay: -1.3s; animation-duration: 2.6s; }
 .patito.cuac svg { animation: cuac 650ms ease-out; }
 .patito.cuac .patito__ojo { display: none; }
 .patito.cuac .patito__ojo-feliz { display: inline; }
