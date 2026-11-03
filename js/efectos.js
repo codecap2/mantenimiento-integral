@@ -30,19 +30,24 @@ aguaFondo.innerHTML = "<span></span>".repeat(8);
 document.body.prepend(aguaFondo);
 
 // ===== Patito de hule: flota en la superficie y dice cuac =====
-const patito = document.createElement("button");
-patito.type = "button";
+// Vive dentro del agua de fondo: queda detrás del contenido y solo se asoma donde se ve el agua
+const patito = document.createElement("div");
 patito.className = "patito";
-patito.setAttribute("aria-label", "Patito de hule");
 patito.innerHTML = `
-  <svg viewBox="0 0 64 56" aria-hidden="true">
-    <path d="M6 32c4 2 8 2 12 0 0 10 8 18 22 18 12 0 20-6 20-15 0-6-4-10-10-12 3-2 5-5 5-9A11 11 0 0 0 44 3c-7 0-11 5-11 11 0 3 1 5 2 7-4-1-8-1-12 0C16 22 10 26 6 32Z" fill="#fbbf24"/>
-    <path d="M24 30c6 6 15 6 22 1-2 8-9 11-15 10-5-1-8-5-7-11Z" fill="#f59e0b"/>
-    <path d="M54 12c4 0 8 1 9 3-2 3-6 4-10 3" fill="#f97316"/>
-    <circle cx="46" cy="10" r="2.4" fill="#0f2a44"/>
-    <circle cx="46.8" cy="9.2" r="0.8" fill="#fff"/>
+  <svg viewBox="0 0 84 70" aria-hidden="true">
+    <path d="M12 40c-6-2-9-8-6-13 4 2 8 6 12 9Z" fill="#facc15"/>
+    <ellipse cx="38" cy="47" rx="30" ry="17" fill="#fde047"/>
+    <ellipse cx="34" cy="40" rx="18" ry="6" fill="#fef9c3" opacity="0.7"/>
+    <path d="M24 46c5-8 18-9 24-1-6 7-18 8-24 1Z" fill="#facc15"/>
+    <circle cx="56" cy="24" r="16" fill="#fde047"/>
+    <circle cx="51" cy="18" r="5" fill="#fef9c3" opacity="0.7"/>
+    <path d="M68 25c6-1 12 1 12 4s-6 4-12 3Z" fill="#fb923c"/>
+    <path d="M68 31c5 1 9 1 10 2-3 3-8 3-11 0Z" fill="#f97316"/>
+    <g class="patito__ojo"><circle cx="61" cy="20" r="4" fill="#0f2a44"/><circle cx="62.5" cy="18.5" r="1.5" fill="#fff"/></g>
+    <path class="patito__ojo-feliz" d="M57 21q4-5 8 0" fill="none" stroke="#0f2a44" stroke-width="2.2" stroke-linecap="round"/>
+    <ellipse cx="62" cy="30" rx="3.5" ry="2.2" fill="#fb7185" opacity="0.45"/>
   </svg>`;
-document.body.append(patito);
+aguaFondo.append(patito);
 const cuacs = [
   "¡Cuac! 🦆",
   "¡Cuac! Aquí el agua va por donde debe. 💧",
@@ -51,28 +56,53 @@ const cuacs = [
   "¡Cuac! ¿Ya cotizaste por WhatsApp? 😉",
 ];
 let cuacActual = 0;
-const ZONAS_OSCURAS = ".portada, .cabecera-pagina, .llamado, .pie, .especialidad, .tarjeta--principal, .encabezado";
-function revisarPatito() {
+// Como está detrás del contenido, revisamos a mano si el clic cayó en la parte visible del patito
+const INTERACTIVOS = "a, button, input, textarea, select, dialog, figure, .servicio, .paso, .extra, .tarjeta, .salida, .especialidad, .portada, .cabecera-pagina, .llamado, .pie, .encabezado";
+function tocaPatito(e) {
   const r = patito.getBoundingClientRect();
-  const debajo = document.elementsFromPoint(r.left + r.width / 2, r.top + r.height * 0.75).find((el) => el !== patito && !patito.contains(el));
-  patito.classList.toggle("oculto", !!(debajo && debajo.closest(ZONAS_OSCURAS)));
+  const dentro = e.clientX >= r.left + 6 && e.clientX <= r.right - 6 && e.clientY >= r.top + 4 && e.clientY <= r.bottom - 10;
+  return dentro && !e.target.closest(INTERACTIVOS);
 }
-setInterval(revisarPatito, 800); // también nada solo, así que se revisa seguido
-patito.addEventListener("click", () => {
+document.addEventListener("click", (e) => {
+  if (!tocaPatito(e)) return;
   patito.classList.remove("cuac");
   void patito.offsetWidth; // reinicia la animación del salto
   patito.classList.add("cuac");
   avisar(cuacs[cuacActual++ % cuacs.length]);
 });
+document.addEventListener("pointermove", (e) => {
+  raiz.classList.toggle("sobre-patito", tocaPatito(e));
+}, { passive: true });
+
+// ===== Chorro: cae del tubo de la cabecera hasta la superficie del agua =====
+const tuboCabecera = document.querySelector(".cabecera-pagina .tubo--h");
+const chorro = tuboCabecera && !reducirMovimiento ? document.createElement("div") : null;
+if (chorro) {
+  chorro.className = "chorro";
+  chorro.setAttribute("aria-hidden", "true");
+  document.body.append(chorro);
+}
+function acomodarChorro(nivel) {
+  if (!chorro) return;
+  const r = tuboCabecera.getBoundingClientRect();
+  const inicio = r.top + 46;                                 // parte de abajo de la boquilla
+  const superficie = window.innerHeight * (1 - nivel) + 6;   // donde está el agua ahora
+  const largo = superficie - inicio;
+  chorro.classList.toggle("activo", largo > 12 && inicio > -20);
+  chorro.style.left = `${r.right - 19}px`;
+  chorro.style.top = `${inicio}px`;
+  chorro.style.height = `${Math.max(0, largo)}px`;
+}
 
 // ===== El agua corre al bajar por la página =====
 let pendiente = false;
 function alBajar() {
   const maximo = Math.max(1, raiz.scrollHeight - window.innerHeight);
   const avance = Math.min(1, window.scrollY / maximo);
+  const nivel = reducirMovimiento ? 0.4 : 0.22 + avance * 0.78;
   raiz.style.setProperty("--flujo", (window.scrollY * 0.6).toFixed(1));
-  raiz.style.setProperty("--nivel", reducirMovimiento ? "0.4" : (0.22 + avance * 0.78).toFixed(3));
-  revisarPatito();
+  raiz.style.setProperty("--nivel", nivel.toFixed(3));
+  acomodarChorro(nivel);
   pendiente = false;
 }
 window.addEventListener("scroll", () => {

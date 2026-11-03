@@ -226,21 +226,21 @@ a { color: inherit; }
 @keyframes ola-fondo { from { background-position: 0 0; } to { background-position: 360px 0; } }
 @keyframes ola-fondo-atras { from { background-position: 0 0; } to { background-position: -360px 0; } }
 
-/* Patito de hule que flota en la superficie del agua */
+/* Patito de hule: vive dentro del agua de fondo, entre la ola de atrás y la de adelante */
+.agua-fondo::after { z-index: -1; }
 .patito {
-  position: fixed; z-index: 45; left: 4vw; bottom: min(calc(var(--nivel, 0.25) * 100vh - 22px), calc(100vh - 160px));
-  width: 56px; height: 50px; padding: 0; border: 0; background: none; cursor: pointer;
-  transition: bottom 250ms ease-out, opacity 300ms ease;
-  animation: deriva 28s ease-in-out infinite alternate;
+  position: absolute; left: 5vw; top: -50px; width: 70px; height: 58px;
+  animation: deriva 30s ease-in-out infinite alternate;
 }
-.patito svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 4px 4px rgb(3 105 161 / 0.35)); animation: flotar 3.2s ease-in-out infinite; transform-origin: 50% 80%; }
-.patito.cuac svg { animation: cuac 600ms ease-out; }
+.patito svg { width: 100%; height: 100%; overflow: visible; filter: drop-shadow(0 3px 3px rgb(3 105 161 / 0.3)); animation: flotar 3.2s ease-in-out infinite; transform-origin: 50% 85%; }
+.patito__ojo-feliz { display: none; }
+.patito.cuac svg { animation: cuac 650ms ease-out; }
+.patito.cuac .patito__ojo { display: none; }
+.patito.cuac .patito__ojo-feliz { display: inline; }
+.sobre-patito, .sobre-patito * { cursor: pointer; }
 @keyframes flotar { 0%, 100% { transform: translateY(0) rotate(-5deg); } 50% { transform: translateY(-5px) rotate(5deg); } }
-@keyframes deriva { from { translate: 0 0; } to { translate: min(22vw, 260px) 0; } }
-@keyframes cuac { 0% { transform: translateY(0) scale(1); } 35% { transform: translateY(-26px) scale(1.12) rotate(-10deg); } 70% { transform: translateY(0) scale(0.95); } 100% { transform: translateY(0) scale(1); } }
-.sin-luz .patito { opacity: 0.25; }
-/* Sobre las zonas oscuras no se ve el agua, así que el patito se esconde */
-.patito.oculto { opacity: 0; pointer-events: none; }
+@keyframes deriva { from { translate: 0 0; } to { translate: min(40vw, 520px) 0; } }
+@keyframes cuac { 0% { transform: translateY(0) scale(1); } 35% { transform: translateY(-28px) scale(1.12) rotate(-10deg); } 70% { transform: translateY(0) scale(0.95); } 100% { transform: translateY(0) scale(1); } }
 .agua-fondo span {
   position: absolute; bottom: -20px; width: 10px; height: 10px; border-radius: 50%;
   border: 1.5px solid rgb(255 255 255 / 0.7); animation: sube-burbuja 9s linear infinite;
@@ -413,10 +413,30 @@ a { color: inherit; }
 .cabecera-pagina p strong { color: var(--color-blanco); font-weight: 600; }
 /* Tubo que entra desde la izquierda en la parte de abajo */
 .cabecera-pagina .tubo--h { position: absolute; left: 0; bottom: -13px; width: min(42%, 420px); z-index: 2; }
+/* Al final del tubo, una boquilla que apunta hacia abajo: de ahí sale el chorro */
 .cabecera-pagina .tubo--h::before {
-  content: ""; position: absolute; right: -6px; top: -6px; width: 16px; height: calc(var(--tubo-grosor) + 12px);
-  background: var(--junta-h); border-radius: 3px;
+  content: ""; position: absolute; right: 0; top: 0; width: var(--tubo-grosor); height: 46px;
+  background: var(--acero-v); border-radius: 3px 3px 6px 6px;
+  box-shadow: inset 0 -6px 0 #142a40;
 }
+
+/* Chorro que cae desde la boquilla hasta la superficie del agua (lo acomoda js/efectos.js) */
+.chorro {
+  position: fixed; z-index: -1; width: 12px; pointer-events: none; border-radius: 0 0 6px 6px;
+  background-image: repeating-linear-gradient(180deg, rgb(56 189 248 / 0.95) 0, rgb(125 211 252 / 0.95) 14px, rgb(14 165 233 / 0.95) 28px);
+  background-size: 100% 28px; animation: cae-chorro 450ms linear infinite;
+  opacity: 0; transition: opacity 200ms;
+}
+.chorro.activo { opacity: 1; }
+.chorro::after {
+  /* salpicadura en la superficie */
+  content: ""; position: absolute; left: 50%; bottom: -8px; width: 46px; height: 14px; transform: translateX(-50%);
+  background: radial-gradient(ellipse at center, rgb(255 255 255 / 0.9) 0 30%, rgb(125 211 252 / 0.6) 50%, transparent 70%);
+  animation: salpica 450ms ease-in-out infinite alternate;
+}
+@keyframes cae-chorro { to { background-position: 0 28px; } }
+@keyframes salpica { from { transform: translateX(-50%) scale(0.85); } to { transform: translateX(-50%) scale(1.15); } }
+.quieto .chorro, .quieto .chorro::after { animation-play-state: paused !important; }
 
 /* ===== Secciones ===== */
 .seccion { padding-block: var(--espacio-5); }
