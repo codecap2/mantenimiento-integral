@@ -14,6 +14,8 @@
   --color-agua-texto: #0369a1;      /* agua oscura: legible sobre blanco */
   --color-luz: #fbbf24;             /* luz: sobre fondos oscuros */
   --color-luz-texto: #92400e;       /* luz oscura: legible sobre blanco */
+  --color-pintura: #fb7185;         /* color: sobre fondos oscuros (el rodillo lo cambia) */
+  --color-pintura-texto: #be123c;   /* color oscuro: legible sobre blanco */
   --color-whatsapp: #0e7a4b;       /* verde con buen contraste para texto blanco */
   --color-whatsapp-hover: #0b633d;
   --color-texto: #1c2733;
@@ -518,6 +520,36 @@ a { color: inherit; }
 
 .especialidad:hover { transform: translateY(-4px); }
 
+/* Pintura: un rodillo que pinta un brochazo (y cambia de color al tocarlo) */
+.resalte-color {
+  background: linear-gradient(90deg, #fb7185, #fbbf24, #34d399, #38bdf8, #a78bfa);
+  -webkit-background-clip: text; background-clip: text; color: transparent;
+}
+.especialidad--color {
+  --pintura: var(--color-pintura);
+  background: radial-gradient(30rem 16rem at 100% 0%, color-mix(in srgb, var(--pintura) 26%, transparent), transparent 70%), linear-gradient(160deg, #24304a, var(--color-marino-3) 60%);
+  transition: transform var(--transicion), background 500ms ease;
+}
+.especialidad__sello--color { color: var(--pintura); background: color-mix(in srgb, var(--pintura) 12%, transparent); border-color: color-mix(in srgb, var(--pintura) 40%, transparent); }
+.brocha { flex: none; width: 34px; height: 80px; margin-right: 4px; transform: rotate(-24deg); transform-origin: 50% 90%; overflow: visible; transition: transform 400ms ease; }
+.brocha__punta { fill: var(--pintura); transition: fill 400ms ease; }
+.especialidad--color:hover .brocha { transform: rotate(-8deg); }
+.brochazo { flex: 1; height: 34px; overflow: visible; }
+.brochazo__pintura {
+  fill: var(--pintura); transform-box: fill-box; transform-origin: left; transform: scaleX(0.4);
+  transition: transform 800ms cubic-bezier(0.3, 0.8, 0.3, 1), fill 400ms ease;
+}
+.especialidad--color:hover .brochazo__pintura, .especialidad--color:focus-within .brochazo__pintura { transform: scaleX(1); }
+.rodillo { flex: none; width: 70px; height: 90px; margin-left: -14px; padding: 0; border: 0; background: none; cursor: pointer; transform: rotate(-8deg); transition: transform 300ms ease; }
+.rodillo svg { width: 100%; height: 100%; overflow: visible; }
+.rodillo__felpa { fill: var(--pintura); transition: fill 400ms ease; }
+.rodillo:hover { transform: rotate(4deg); }
+.rodillo.pintando { animation: pintar 500ms ease; }
+@keyframes pintar { 0% { transform: rotate(-8deg); } 40% { transform: rotate(14deg) translateY(-6px); } 100% { transform: rotate(-8deg); } }
+.servicio--color .servicio__icono { color: var(--color-pintura); }
+.servicio--color li::before { background: var(--color-pintura); }
+.servicio--color .servicio__sello { color: var(--color-pintura-texto); }
+
 /* "También hacemos": tarjetas de cristal sobre el agua */
 .tambien { margin-top: var(--espacio-4); }
 .tambien__titulo { font-size: 1.15rem; color: var(--color-texto-suave); margin-bottom: var(--espacio-2); }
@@ -588,6 +620,15 @@ a { color: inherit; }
 }
 .filtros button:hover { border-color: var(--color-agua-texto); }
 .filtros button[aria-pressed="true"] { color: var(--color-blanco); background: var(--color-marino); border-color: var(--color-marino); }
+.filtros button { display: inline-flex; align-items: center; gap: 0.45rem; }
+.filtro__icono { width: 1.1rem; height: 1.1rem; }
+.filtro__icono--agua { color: var(--color-agua-fuerte); }
+.filtro__icono--luz { color: #d97706; }
+.filtro__icono--color { color: var(--color-pintura); }
+.filtro__icono--techo { color: #64748b; }
+.filtros button[aria-pressed="true"] .filtro__icono--luz { color: var(--color-luz); }
+.filtros button[aria-pressed="true"] .filtro__icono--techo { color: #cbd5e1; }
+.galeria__tipo--pintura { color: var(--color-pintura-texto); }
 
 /* Visor de fotos */
 .visor { width: min(96vw, 1100px); max-height: 94vh; padding: 0; border: 0; border-radius: var(--radio); background: var(--color-marino-3); color: var(--color-blanco); overflow: visible; }

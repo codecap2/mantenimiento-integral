@@ -22,6 +22,50 @@ function avisar(texto) {
 }
 aviso.addEventListener("click", () => aviso.classList.remove("visible"));
 
+// Cada sorpresa tiene varios mensajes que van rotando (el primero es el original)
+function rotar(mensajes) {
+  let i = 0;
+  return () => mensajes[i++ % mensajes.length];
+}
+const MENSAJES = {
+  llaveCerrada: rotar([
+    "Llave cerrada. Así de rápido controlamos una fuga. 😉",
+    "Llave cerrada. ¿Ves? Sin agua, sin fugas. 🔧",
+    "Cerradita. Así de fácil se arregla cuando sabes cómo. 😎",
+    "¡Cerrada! Con nosotros no se escapa ni una gota. 💧",
+  ]),
+  llaveAbierta: rotar([
+    "¡Agua de vuelta! 💧",
+    "¡Y el agua vuelve a correr! 🌊",
+    "Abierta otra vez. Todo fluye como debe. 😉",
+    "¡Agua! Tuberías llenas y sin fugas. 🔧",
+  ]),
+  inundacion: rotar([
+    "¡Tranquilo! Para inundaciones (y fugas) estamos nosotros. 🔧",
+    "¡Uy, se nos llenó la página! No te preocupes, sabemos de drenajes. 😅",
+    "¡Glu glu! Si esto pasa en tu casa, ya sabes a quién llamar. 🌊",
+    "¿Inundación? Nada que no podamos resolver. 💪",
+  ]),
+  apagon: rotar([
+    "¡Se fue la luz! Tranquilo, también somos electricistas. ⚡ Toca el foco para regresarla.",
+    "¡Apagón! Usa tu linterna 🔦 y toca el foco para volver la luz.",
+    "Oscuridad total… menos mal que sabemos de electricidad. ⚡ Toca el foco.",
+    "¿Se botó la pastilla? 😄 Toca el foco y lo arreglamos.",
+  ]),
+  luz: rotar([
+    "¡Luz de vuelta! 💡",
+    "¡Hágase la luz! ✨",
+    "Listo, luz restablecida. Así de rápido. ⚡",
+    "💡 ¡Todo iluminado otra vez!",
+  ]),
+  pintura: rotar([
+    "¿De qué color quieres tu casa? Nosotros la pintamos.",
+    "¿Te gusta? Imagínalo en tu sala.",
+    "Más de 20 años pintando: el color lo eliges tú.",
+    "¿Así o más bonito? 😄",
+  ]),
+};
+
 // ===== Agua de fondo: sube y llena la página mientras bajas =====
 const aguaFondo = document.createElement("div");
 aguaFondo.className = "agua-fondo";
@@ -48,11 +92,17 @@ patito.innerHTML = `
     <ellipse cx="62" cy="30" rx="3.5" ry="2.2" fill="#fb7185" opacity="0.45"/>
   </svg>`;
 aguaFondo.append(patito);
+// El patito alterna saludos, pistas de los secretos y consejos útiles de mantenimiento
 const cuacs = [
-  "¡Cuac! 🦆",
-  "¡Cuac! Aquí el agua va por donde debe. 💧",
-  "¡Cuac cuac! Ni una fuga a la vista. 🔧",
-  "🦆 Psst… prueba tocar el foco. ⚡",
+  "¡Cuac! 🦆 Soy el patito de la casa. Tócame otra vez y te cuento secretos…",
+  "🦆 Pista: el foco de Electricidad esconde algo. ⚡",
+  "🦆 Consejo: si tu recibo de agua subió sin razón, puede haber una fuga escondida. 💧",
+  "🦆 Pista: el rodillo de Pintura cambia de color. 🎨",
+  "🦆 Consejo: si una pastilla eléctrica se bota seguido, no la fuerces. Puede ser una falla: escríbenos.",
+  "🦆 Pista: dale 5 clics rápidos a la llave de la portada… si te atreves. 🔧",
+  "🦆 Consejo: antes de la temporada de lluvias es el mejor momento para impermeabilizar. ☔",
+  "🦆 Pista: escribe «agua» con el teclado en cualquier página. 🌊",
+  "🦆 Consejo: pintar en días secos ayuda a que la pintura seque pareja y dure más.",
   "¡Cuac! ¿Ya cotizaste por WhatsApp? 😉",
 ];
 let cuacActual = 0;
@@ -297,9 +347,9 @@ if (llave && hub) {
     setTimeout(() => llave.classList.remove("girando"), 900);
 
     if (cerrada) {
-      avisar("Llave cerrada. Así de rápido controlamos una fuga. 😉");
+      avisar(MENSAJES.llaveCerrada());
     } else {
-      avisar("¡Agua de vuelta! 💧");
+      avisar(MENSAJES.llaveAbierta());
       if (burbujas) burbujas.salpicar(...burbujas.posicion(llave), 24);
     }
 
@@ -329,7 +379,7 @@ function apagarLuz() {
   document.body.append(apagon);
   raiz.classList.add("sin-luz");
   foco.setAttribute("aria-label", "Encender la luz");
-  avisar("¡Se fue la luz! Tranquilo, también somos electricistas. ⚡ Toca el foco para regresarla.");
+  avisar(MENSAJES.apagon());
   apagonTiempo = setTimeout(encenderLuz, 15000);
 }
 
@@ -340,7 +390,7 @@ function encenderLuz() {
   clearTimeout(apagonTiempo);
   raiz.classList.remove("sin-luz");
   foco.setAttribute("aria-label", "Apagar la luz");
-  avisar("¡Luz de vuelta! 💡");
+  avisar(MENSAJES.luz());
 }
 
 if (foco) {
@@ -353,6 +403,26 @@ if (foco) {
   document.addEventListener("keydown", (e) => { if (e.key === "Escape") encenderLuz(); });
 }
 
+// ===== Easter egg: el rodillo cambia el color de la pintura =====
+const rodillo = document.getElementById("rodillo");
+if (rodillo) {
+  const tarjetaColor = document.getElementById("especialidad-color");
+  const COLORES = [
+    ["#fb7185", "Coral"], ["#38bdf8", "Azul cielo"], ["#fbbf24", "Amarillo sol"],
+    ["#34d399", "Verde menta"], ["#a78bfa", "Lavanda"], ["#f97316", "Naranja"],
+  ];
+  let colorActual = 0;
+  rodillo.addEventListener("click", () => {
+    colorActual = (colorActual + 1) % COLORES.length;
+    const [color, nombre] = COLORES[colorActual];
+    tarjetaColor.style.setProperty("--pintura", color);
+    rodillo.classList.remove("pintando");
+    void rodillo.offsetWidth;
+    rodillo.classList.add("pintando");
+    avisar(`🎨 ${nombre}. ${MENSAJES.pintura()}`);
+  });
+}
+
 // ===== Easter egg: escribe "agua" en la página =====
 let tecleado = "";
 document.addEventListener("keydown", (e) => {
@@ -363,7 +433,8 @@ document.addEventListener("keydown", (e) => {
 
 let inundando = false;
 function inundar() {
-  const mensaje = "¡Tranquilo! Para inundaciones (y fugas) estamos nosotros. 🔧";
+  if (inundando) return;
+  const mensaje = MENSAJES.inundacion();
   if (reducirMovimiento) { avisar(mensaje); return; }
   if (inundando) return;
   inundando = true;
@@ -397,5 +468,5 @@ if (!reducirMovimiento && matchMedia("(hover: hover) and (pointer: fine)").match
 console.log(
   "%c🔧 ¿Curioseando el código?",
   "font: 700 16px sans-serif; color: #0ea5e9",
-  "\nNos gusta la gente curiosa. Psst… escribe \"agua\" en la página, o toca el foco. 💧⚡"
+  "\nNos gusta la gente curiosa. Psst… escribe \"agua\" en la página, toca el foco, el rodillo… o al patito. 💧⚡🎨🦆"
 );
