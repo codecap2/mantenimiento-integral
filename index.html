@@ -7,10 +7,18 @@
   <meta name="description" content="Especialistas en fontanería y electricidad en Aguascalientes y Jesús María. También pintura e impermeabilización. Cotiza por WhatsApp.">
   <meta name="theme-color" content="#0f2a44">
 
+  <!-- Vista previa al compartir el enlace (WhatsApp, Facebook, etc.) -->
   <meta property="og:type" content="website">
-  <meta property="og:title" content="Mantenimientos Integrales">
-  <meta property="og:description" content="Fontanería, electricidad, pintura e impermeabilización en Aguascalientes y Jesús María.">
+  <meta property="og:site_name" content="Mantenimientos Integrales">
+  <meta property="og:title" content="Mantenimientos Integrales · Agua y luz, en buenas manos">
+  <meta property="og:description" content="Especialistas en fontanería y electricidad en Aguascalientes y Jesús María. Cotiza por WhatsApp.">
+  <meta property="og:url" content="https://codecap2.github.io/mantenimientos-integrales/">
+  <meta property="og:image" content="https://codecap2.github.io/mantenimientos-integrales/img/vista-previa.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Mantenimientos Integrales: agua y luz, en buenas manos">
   <meta property="og:locale" content="es_MX">
+  <meta name="twitter:card" content="summary_large_image">
 
   <link rel="icon" href="img/favicon.svg" type="image/svg+xml">
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -42,7 +50,7 @@
   <a class="saltar" href="#contenido">Saltar al contenido</a>
 
   <header class="encabezado" id="encabezado">
-    <div class="contenedor encabezado__fila">
+    <div class="contenedor contenedor--ancho encabezado__fila">
       <a class="logo" href="index.html" aria-label="Mantenimientos Integrales, ir al inicio">
         <svg class="logo__icono" viewBox="0 0 32 32" aria-hidden="true"><use href="img/iconos.svg#i-casa"/></svg>
         <span>Mantenimientos <strong>Integrales</strong></span>
@@ -195,10 +203,26 @@
           </article>
         </div>
 
-        <div class="tambien aparecer">
-          <p>También hacemos:</p>
-          <a class="chip" href="servicios.html#pintura"><svg aria-hidden="true"><use href="img/iconos.svg#i-rodillo"/></svg> Pintura y detallado</a>
-          <a class="chip" href="servicios.html#impermeabilizacion"><svg aria-hidden="true"><use href="img/iconos.svg#i-escudo"/></svg> Impermeabilización</a>
+        <div class="tambien">
+          <h3 class="tambien__titulo aparecer">También hacemos</h3>
+          <div class="tambien__grid">
+            <a class="extra aparecer" href="servicios.html#pintura">
+              <span class="extra__icono"><svg aria-hidden="true"><use href="img/iconos.svg#i-rodillo"/></svg></span>
+              <span class="extra__texto">
+                <span class="extra__nombre">Pintura y detallado</span>
+                <span>Interiores, fachadas, resanes y acabados que dejan todo como nuevo.</span>
+              </span>
+              <span class="extra__ir" aria-hidden="true">→</span>
+            </a>
+            <a class="extra aparecer" href="servicios.html#impermeabilizacion">
+              <span class="extra__icono"><svg aria-hidden="true"><use href="img/iconos.svg#i-escudo"/></svg></span>
+              <span class="extra__texto">
+                <span class="extra__nombre">Impermeabilización</span>
+                <span>Techos y azoteas sin goteras ni humedad, listos para las lluvias.</span>
+              </span>
+              <span class="extra__ir" aria-hidden="true">→</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -246,7 +270,7 @@
   <footer class="pie">
     <div class="tubo-linea" aria-hidden="true"></div>
     <div class="cable-linea" aria-hidden="true"></div>
-    <div class="contenedor pie__fila">
+    <div class="contenedor contenedor--ancho pie__fila">
       <p>© <span id="anio">2026</span> Mantenimientos Integrales · Aguascalientes, México</p>
       <nav aria-label="Pie de página">
         <a href="index.html">Inicio</a>

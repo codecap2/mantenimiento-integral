@@ -48,7 +48,7 @@
   --espacio-5: clamp(4rem, 3rem + 4vw, 6.5rem);
   --radio: 14px;
   --radio-chico: 10px;
-  --ancho-max: 1120px;
+  --ancho-max: 1240px;
   --sombra: 0 1px 2px rgb(15 42 68 / 0.06), 0 8px 24px rgb(15 42 68 / 0.08);
   --sombra-fuerte: 0 2px 4px rgb(10 30 49 / 0.2), 0 18px 44px rgb(10 30 49 / 0.35);
   --transicion: 200ms ease;
@@ -82,6 +82,8 @@ a { color: inherit; }
 .oscuro { --color-foco: var(--color-agua); }
 
 .contenedor { width: min(100% - 2rem, var(--ancho-max)); margin-inline: auto; }
+/* Encabezado y pie usan todo el ancho: logo a la izquierda, menú a la derecha */
+.contenedor--ancho { width: min(100% - clamp(2rem, 6vw, 6rem), 1680px); }
 
 .saltar {
   position: absolute; left: 1rem; top: -4rem; z-index: 100;
@@ -152,24 +154,77 @@ a { color: inherit; }
 .tubo--h::after { background-position: calc(var(--flujo, 0) * 1px) 0; }
 .tubo--hacia-izq::after { background-position: calc(var(--flujo, 0) * -1px) 0; }
 
-/* Línea de tubería decorativa (bajo el encabezado, sobre el pie) */
-.tubo-linea { position: relative; height: 12px; background: var(--acero-h); overflow: hidden; }
+/* Tubería decorativa (bajo el encabezado y sobre el pie): acero, juntas y agua corriendo */
+.tubo-linea { position: relative; height: 22px; overflow: hidden; }
+/* Bajo el encabezado siempre viene una portada oscura: el borde inferior se funde con ella */
+.encabezado .tubo-linea { background: linear-gradient(180deg, transparent 50%, var(--color-marino) 50%); }
+.tubo-linea::before {
+  /* el tubo de acero */
+  content: ""; position: absolute; left: 0; right: 0; top: 3px; bottom: 3px; background: var(--acero-h);
+}
 .tubo-linea::after {
-  content: ""; position: absolute; left: 0; right: 0; top: 3px; bottom: 3px;
-  background-image: repeating-linear-gradient(90deg, var(--color-agua-fuerte) 0, var(--color-agua) 20px, var(--color-agua-fuerte) 40px);
-  background-size: 40px 100%; background-position: calc(var(--flujo, 0) * 1px) 0;
-  transform-origin: left; animation: llenar-h 1200ms ease-out 200ms both;
+  /* el agua por dentro y las juntas cada cierto tramo */
+  content: ""; position: absolute; inset: 0;
+  background-image:
+    repeating-linear-gradient(90deg, transparent 0 224px, #22405e 224px 226px, #9fb7cf 226px 232px, #22405e 232px 240px),
+    repeating-linear-gradient(90deg, var(--color-agua-fuerte) 0, var(--color-agua) 20px, #7dd3fc 26px, var(--color-agua-fuerte) 40px);
+  background-size: 240px 100%, 40px 8px;
+  background-repeat: repeat-x, repeat-x;
+  background-position: 0 0, 0 center;
+  animation: corre-tubo 1.6s linear infinite, llenar-h 1200ms ease-out 200ms backwards;
+  transform-origin: left;
 }
-.pie .tubo-linea::after { background-position: calc(var(--flujo, 0) * -1px) 0; transform-origin: right; }
+.pie .tubo-linea::after { animation-direction: reverse, normal; transform-origin: right; }
+@keyframes corre-tubo { from { background-position: 0 0, 0 center; } to { background-position: 0 0, 40px center; } }
 
-/* Cable eléctrico decorativo (pie): pulsos de luz que corren al bajar */
-.cable-linea { position: relative; height: 6px; background: linear-gradient(180deg, #1c2b3a, #070f18); overflow: hidden; }
+/* Cable eléctrico decorativo (pie): pulsos de luz que corren */
+.cable-linea { position: relative; height: 10px; background: linear-gradient(180deg, #24384d, #0a1520 60%, #050b12); overflow: hidden; }
 .cable-linea::after {
-  content: ""; position: absolute; left: 0; right: 0; top: 2px; height: 2px;
-  background-image: repeating-linear-gradient(90deg, transparent 0 34px, var(--color-luz) 34px 46px, transparent 46px 80px);
-  background-size: 80px 100%; background-position: calc(var(--flujo, 0) * 2px) 0;
-  filter: drop-shadow(0 0 3px var(--color-luz));
+  content: ""; position: absolute; left: 0; right: 0; top: 4px; height: 2px;
+  background-image: repeating-linear-gradient(90deg, transparent 0 34px, var(--color-luz) 34px 50px, transparent 50px 80px);
+  background-size: 80px 100%;
+  filter: drop-shadow(0 0 4px var(--color-luz));
+  animation: corre-cable 900ms linear infinite;
 }
+@keyframes corre-cable { to { background-position: 80px 0; } }
+
+/* Pausa global: detiene lo que se mueve solo */
+.quieto .tubo-linea::after, .quieto .cable-linea::after,
+.quieto .agua-fondo::before, .quieto .agua-fondo span { animation-play-state: paused !important; }
+.pausa-global {
+  min-height: 40px; padding: 0.4rem 0.9rem; font: 500 0.85rem/1 var(--fuente-texto);
+  color: rgb(255 255 255 / 0.85); background: rgb(255 255 255 / 0.06);
+  border: 1px solid rgb(255 255 255 / 0.2); border-radius: 999px; cursor: pointer;
+}
+.pausa-global:hover { background: rgb(255 255 255 / 0.12); color: var(--color-blanco); }
+.pie :focus-visible { --color-foco: var(--color-agua); }
+
+/* ===== Agua de fondo: sube conforme bajas por la página ===== */
+.agua-fondo {
+  position: fixed; left: 0; right: 0; bottom: 0; height: 100vh; z-index: -1; pointer-events: none;
+  background: linear-gradient(180deg, #e0f2fe 0%, #cdeefe 100%);
+  transform: translateY(calc((1 - var(--nivel, 0.1)) * 100%));
+}
+.agua-fondo::before {
+  /* olas en la superficie */
+  content: ""; position: absolute; left: 0; right: 0; top: -17px; height: 18px;
+  background: radial-gradient(circle at 30px 30px, #e0f2fe 27px, transparent 28px) repeat-x;
+  background-size: 60px 18px; animation: ola-fondo 5s linear infinite;
+}
+@keyframes ola-fondo { to { background-position: 60px 0; } }
+.agua-fondo span {
+  position: absolute; bottom: -20px; width: 10px; height: 10px; border-radius: 50%;
+  border: 1.5px solid rgb(3 105 161 / 0.25); animation: sube-burbuja 9s linear infinite;
+}
+.agua-fondo span:nth-child(1) { left: 6%; animation-delay: 0s; }
+.agua-fondo span:nth-child(2) { left: 18%; width: 6px; height: 6px; animation-delay: 3s; animation-duration: 11s; }
+.agua-fondo span:nth-child(3) { left: 31%; animation-delay: 6s; }
+.agua-fondo span:nth-child(4) { left: 47%; width: 14px; height: 14px; animation-delay: 1.5s; animation-duration: 12s; }
+.agua-fondo span:nth-child(5) { left: 60%; width: 7px; height: 7px; animation-delay: 4.5s; }
+.agua-fondo span:nth-child(6) { left: 72%; animation-delay: 7.5s; animation-duration: 10s; }
+.agua-fondo span:nth-child(7) { left: 85%; width: 12px; height: 12px; animation-delay: 2.2s; }
+.agua-fondo span:nth-child(8) { left: 94%; width: 6px; height: 6px; animation-delay: 5.2s; animation-duration: 13s; }
+@keyframes sube-burbuja { from { transform: translateY(0); opacity: 0; } 10% { opacity: 1; } 90% { opacity: 1; } to { transform: translateY(-100vh); opacity: 0; } }
 
 /* ===== Encabezado ===== */
 .encabezado { position: sticky; top: 0; z-index: 50; background: rgb(255 255 255 / 0.94); backdrop-filter: blur(10px); transition: box-shadow var(--transicion); }
@@ -286,10 +341,10 @@ a { color: inherit; }
   filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.35)); transition: filter var(--transicion);
 }
 .llave:hover { filter: drop-shadow(0 6px 10px rgb(0 0 0 / 0.35)) brightness(1.15); }
-.llave svg { width: 100%; height: 100%; }
-.llave__volante { transform-box: fill-box; transform-origin: center; transform: rotate(calc(var(--flujo, 0) * 0.5deg)); }
-.llave__giro { transform-box: fill-box; transform-origin: center; transition: transform 600ms cubic-bezier(0.3, 1.4, 0.5, 1); }
-.hub.cerrada .llave__giro { transform: rotate(-140deg); }
+.llave svg { width: 100%; height: 100%; overflow: visible; }
+/* Gira sobre su propio centro (40,40 del dibujo); el ángulo lo pone js/efectos.js */
+.llave__volante { transform-box: view-box; transform-origin: 40px 40px; }
+.llave.girando .llave__volante { transition: transform 900ms cubic-bezier(0.3, 1.2, 0.5, 1); }
 
 /* Llave cerrada: las tuberías se vacían */
 .hub.cerrada .tubo::after { animation: none !important; transition: transform 450ms ease-in; }
@@ -336,7 +391,7 @@ a { color: inherit; }
 
 /* ===== Secciones ===== */
 .seccion { padding-block: var(--espacio-5); }
-.seccion--suave { background: var(--color-fondo-suave); }
+.seccion--suave { background: rgb(242 246 250 / 0.55); }
 .seccion__cabeza { max-width: 40rem; margin-bottom: var(--espacio-4); }
 
 /* Servicios (página de servicios) */
@@ -414,17 +469,30 @@ a { color: inherit; }
 
 .especialidad:hover { transform: translateY(-4px); }
 
-/* "También hacemos" */
-.tambien { display: flex; flex-wrap: wrap; align-items: center; gap: var(--espacio-1) var(--espacio-2); margin-top: var(--espacio-3); }
-.tambien p { margin: 0; font-weight: 600; color: var(--color-texto-suave); }
-.chip {
-  display: inline-flex; align-items: center; gap: 0.5rem; min-height: 44px; padding: 0.5rem 1rem;
-  font-weight: 600; color: var(--color-marino); text-decoration: none;
-  background: var(--color-fondo-suave); border: 1px solid var(--color-borde); border-radius: 999px;
-  transition: background var(--transicion), border-color var(--transicion);
+/* "También hacemos": tarjetas de cristal sobre el agua */
+.tambien { margin-top: var(--espacio-4); }
+.tambien__titulo { font-size: 1.15rem; color: var(--color-texto-suave); margin-bottom: var(--espacio-2); }
+.tambien__grid { display: grid; gap: var(--espacio-3); grid-template-columns: repeat(auto-fit, minmax(min(100%, 320px), 1fr)); }
+.extra {
+  position: relative; display: flex; align-items: center; gap: var(--espacio-2);
+  padding: var(--espacio-3); color: var(--color-texto-suave); text-decoration: none;
+  background: rgb(255 255 255 / 0.72); backdrop-filter: blur(8px);
+  border: 1px solid rgb(255 255 255 / 0.9); border-radius: var(--radio); box-shadow: var(--sombra);
+  transition: transform var(--transicion), box-shadow var(--transicion);
 }
-.chip:hover { background: var(--color-fondo); border-color: var(--color-agua-texto); }
-.chip svg { width: 1.2rem; height: 1.2rem; color: var(--color-agua-texto); }
+.extra:hover { box-shadow: var(--sombra-fuerte); }
+.extra__icono { flex: none; display: grid; place-items: center; width: 3.5rem; height: 3.5rem; border-radius: 50%; background: var(--color-marino); color: var(--color-agua); }
+.extra__icono svg { width: 1.6rem; height: 1.6rem; }
+.extra__texto { display: flex; flex-direction: column; gap: 0.2rem; flex: 1; font-size: var(--texto-s); }
+.extra__nombre { font: 700 1.2rem/1.2 var(--fuente-titulos); color: var(--color-marino); }
+.extra__ir { font-size: 1.4rem; color: var(--color-agua-texto); transition: transform var(--transicion); }
+.extra:hover .extra__ir { transform: translateX(4px); }
+.extra::after {
+  content: ""; position: absolute; inset: 0; border-radius: inherit; pointer-events: none;
+  background: radial-gradient(circle at var(--mx, 50%) var(--my, 50%), rgb(56 189 248 / 0.18), transparent 45%);
+  opacity: 0; transition: opacity var(--transicion);
+}
+.extra:hover::after { opacity: 1; }
 
 /* Servicios destacados (página de servicios) */
 .servicios-titulo { margin: var(--espacio-4) 0 var(--espacio-3); }

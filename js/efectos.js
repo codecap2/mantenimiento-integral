@@ -3,30 +3,67 @@
 const reducirMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const raiz = document.documentElement;
 
+function leerPreferencia(clave) { try { return localStorage.getItem(clave); } catch { return null; } }
+function guardarPreferencia(clave, valor) { try { localStorage.setItem(clave, valor); } catch {} }
+
 // ===== Avisos pequeños (abajo a la izquierda) =====
 const aviso = document.createElement("div");
 aviso.className = "aviso";
 aviso.setAttribute("role", "status");
+aviso.title = "Toca para cerrar";
 document.body.append(aviso);
 let avisoTiempo;
 function avisar(texto) {
   aviso.textContent = texto;
   aviso.classList.add("visible");
   clearTimeout(avisoTiempo);
-  avisoTiempo = setTimeout(() => aviso.classList.remove("visible"), 3800);
+  // Más texto, más tiempo para leerlo
+  avisoTiempo = setTimeout(() => aviso.classList.remove("visible"), Math.max(6000, texto.length * 95));
+}
+aviso.addEventListener("click", () => aviso.classList.remove("visible"));
+
+// ===== Agua de fondo: sube y llena la página mientras bajas =====
+const aguaFondo = document.createElement("div");
+aguaFondo.className = "agua-fondo";
+aguaFondo.setAttribute("aria-hidden", "true");
+aguaFondo.innerHTML = "<span></span>".repeat(8);
+document.body.prepend(aguaFondo);
+
+// ===== El agua corre al bajar por la página =====
+let pendiente = false;
+function alBajar() {
+  const maximo = Math.max(1, raiz.scrollHeight - window.innerHeight);
+  const avance = Math.min(1, window.scrollY / maximo);
+  raiz.style.setProperty("--flujo", (window.scrollY * 0.6).toFixed(1));
+  raiz.style.setProperty("--nivel", reducirMovimiento ? "0.35" : (0.1 + avance * 0.9).toFixed(3));
+  pendiente = false;
+}
+window.addEventListener("scroll", () => {
+  if (!pendiente) { pendiente = true; requestAnimationFrame(alBajar); }
+}, { passive: true });
+window.addEventListener("resize", alBajar);
+alBajar();
+
+// ===== Pausar animaciones (para toda la página) =====
+const botonesPausa = [];
+function ponerQuieto(quieto) {
+  raiz.classList.toggle("quieto", quieto);
+  guardarPreferencia("quieto", quieto ? "1" : "0");
+  botonesPausa.forEach((b) => b.actualizar(quieto));
+  if (burbujas) burbujas.activar(!quieto);
 }
 
-// ===== El agua de las tuberías corre al bajar por la página =====
-if (!reducirMovimiento) {
-  let pendiente = false;
-  const actualizarFlujo = () => {
-    raiz.style.setProperty("--flujo", (window.scrollY * 0.6).toFixed(1));
-    pendiente = false;
+const pie = document.querySelector(".pie__fila");
+if (pie && !reducirMovimiento) {
+  const boton = document.createElement("button");
+  boton.type = "button";
+  boton.className = "pausa-global";
+  boton.actualizar = (quieto) => {
+    boton.textContent = quieto ? "▶ Reanudar animaciones" : "❚❚ Pausar animaciones";
   };
-  window.addEventListener("scroll", () => {
-    if (!pendiente) { pendiente = true; requestAnimationFrame(actualizarFlujo); }
-  }, { passive: true });
-  actualizarFlujo();
+  boton.addEventListener("click", () => ponerQuieto(!raiz.classList.contains("quieto")));
+  pie.append(boton);
+  botonesPausa.push(boton);
 }
 
 // ===== Burbujas de la portada =====
@@ -103,7 +140,7 @@ function crearBurbujas(lienzo) {
 
   function bucle() { paso(); cuadro = requestAnimationFrame(bucle); }
   function revisar() {
-    const debeCorrer = activo && enPantalla && !document.hidden;
+    const debeCorrer = (activo || extra.length) && enPantalla && !document.hidden;
     if (debeCorrer && !cuadro) bucle();
     if (!debeCorrer && cuadro) { cancelAnimationFrame(cuadro); cuadro = null; }
   }
@@ -129,13 +166,13 @@ function crearBurbujas(lienzo) {
         b.vida = 1;
         extra.push(b);
       }
-      if (!activo) { activo = true; actualizarPausa(); }
       revisar();
     },
     posicion(el) {
       const z = zona.getBoundingClientRect(), r = el.getBoundingClientRect();
       return [r.left + r.width / 2 - z.left, r.top + r.height / 2 - z.top];
     },
+    activar(si) { activo = si && !reducirMovimiento; revisar(); },
   };
 
   // Clic en el fondo de la portada: chorrito de burbujas
@@ -145,30 +182,53 @@ function crearBurbujas(lienzo) {
     api.salpicar(e.clientX - r.left, e.clientY - r.top);
   });
 
-  // Botón para pausar (las animaciones largas deben poder detenerse)
+  // Botón de pausa de la portada (controla todas las animaciones)
   const pausa = document.getElementById("pausa");
-  function actualizarPausa() {
-    if (!pausa) return;
-    pausa.textContent = activo ? "❚❚" : "▶";
-    pausa.setAttribute("aria-label", activo ? "Pausar las burbujas" : "Reanudar las burbujas");
-  }
   if (pausa && !reducirMovimiento) {
     pausa.hidden = false;
-    pausa.addEventListener("click", () => { activo = !activo; actualizarPausa(); revisar(); });
+    pausa.actualizar = (quieto) => {
+      pausa.textContent = quieto ? "▶" : "❚❚";
+      pausa.setAttribute("aria-label", quieto ? "Reanudar animaciones" : "Pausar animaciones");
+    };
+    pausa.addEventListener("click", () => ponerQuieto(!raiz.classList.contains("quieto")));
+    botonesPausa.push(pausa);
   }
 
   revisar();
   return api;
 }
 
-// ===== Llave de paso: abre y cierra el agua =====
+ponerQuieto(leerPreferencia("quieto") === "1");
+
+// ===== Llave de paso: gira sobre sí misma, abre y cierra el agua =====
 const llave = document.getElementById("llave");
 const hub = document.querySelector(".hub");
 if (llave && hub) {
-  let clics = [];
+  const volante = llave.querySelector(".llave__volante");
+  let angulo = 0, ultimoY = window.scrollY, clics = [];
+  const pintar = () => { volante.style.transform = `rotate(${angulo}deg)`; };
+
+  // Con el agua abierta, la llave gira al bajar por la página; cerrada, se queda quieta
+  if (!reducirMovimiento) {
+    window.addEventListener("scroll", () => {
+      if (!hub.classList.contains("cerrada") && !llave.classList.contains("girando")) {
+        angulo += (window.scrollY - ultimoY) * 0.5;
+        pintar();
+      }
+      ultimoY = window.scrollY;
+    }, { passive: true });
+  }
+
   llave.addEventListener("click", () => {
     const cerrada = hub.classList.toggle("cerrada");
     llave.setAttribute("aria-label", cerrada ? "Abrir la llave del agua" : "Cerrar la llave del agua");
+
+    // Cerrar: vuelta a la derecha. Abrir: vuelta a la izquierda.
+    llave.classList.add("girando");
+    angulo += cerrada ? 360 : -360;
+    pintar();
+    setTimeout(() => llave.classList.remove("girando"), 900);
+
     if (cerrada) {
       avisar("Llave cerrada. Así de rápido controlamos una fuga. 😉");
     } else {
@@ -203,7 +263,7 @@ function apagarLuz() {
   raiz.classList.add("sin-luz");
   foco.setAttribute("aria-label", "Encender la luz");
   avisar("¡Se fue la luz! Tranquilo, también somos electricistas. ⚡ Toca el foco para regresarla.");
-  apagonTiempo = setTimeout(encenderLuz, 12000);
+  apagonTiempo = setTimeout(encenderLuz, 15000);
 }
 
 function encenderLuz() {
@@ -254,7 +314,7 @@ function inundar() {
 
 // ===== Tarjetas que se inclinan en 3D siguiendo el mouse =====
 if (!reducirMovimiento && matchMedia("(hover: hover) and (pointer: fine)").matches) {
-  document.querySelectorAll(".salida, .servicio, .paso, .especialidad, .tarjeta:not(.tarjeta--principal)").forEach((tarjeta) => {
+  document.querySelectorAll(".salida, .servicio, .paso, .especialidad, .extra, .tarjeta:not(.tarjeta--principal)").forEach((tarjeta) => {
     tarjeta.addEventListener("pointermove", (e) => {
       const r = tarjeta.getBoundingClientRect();
       const px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
