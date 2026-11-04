@@ -161,55 +161,63 @@ capi.setAttribute("aria-label", "Capi, el capibara ayudante");
 capi.innerHTML = `
   <span class="capi__globo" aria-hidden="true">¿Te ayudo? Escríbenos 👉</span>
   <svg viewBox="0 0 100 120" aria-hidden="true">
-    <!-- patitas -->
-    <rect x="34" y="100" width="12" height="15" rx="5.5" fill="#9a5f2f"/>
-    <rect x="60" y="100" width="12" height="15" rx="5.5" fill="#a8693a"/>
-    <ellipse cx="38" cy="115" rx="8" ry="4" fill="#8a5426"/>
-    <ellipse cx="64" cy="115" rx="8" ry="4" fill="#8a5426"/>
-    <!-- cuerpo: pecho de perfil, como capibara sentado -->
-    <path d="M42 48c-12 10-16 30-14 50 1 7 6 9 13 9h33c9 0 14-5 14-13 0-28-10-48-28-54Z" fill="#b9773f"/>
-    <path d="M40 66c-4 10-5 22-3 32" fill="none" stroke="#d29a5e" stroke-width="5" stroke-linecap="round" opacity="0.5"/>
-    <ellipse cx="34" cy="80" rx="5" ry="11" fill="#a8693a" transform="rotate(14 34 80)"/>
-    <!-- cinturón con pinzas y rodillo -->
-    <path d="M29 86c18 3 40 3 59-1v8c-19 4-41 4-59 1Z" fill="#5b3a21"/>
-    <rect x="52" y="85" width="10" height="10" rx="2" fill="#fbbf24"/>
-    <rect x="54.5" y="87.5" width="5" height="5" rx="1" fill="#5b3a21"/>
-    <rect x="31" y="92" width="12" height="11" rx="3" fill="#7c4a26"/>
-    <path d="M35 92l-3-13M40 92l3-13" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
-    <path d="M32 79l2.5-6 2.5 6M43 79l-2.5-6-2.5 6" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linejoin="round"/>
-    <rect x="72" y="91" width="12" height="11" rx="3" fill="#7c4a26"/>
-    <path d="M78 91V80h6" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linejoin="round"/>
-    <rect x="80" y="72" width="14" height="9" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
-    <!-- cabeza larga de perfil, mirando de reojo -->
+    <defs>
+      <linearGradient id="capi-pelo" x1="0" y1="0" x2="1" y2="1">
+        <stop offset="0" stop-color="#c98c52"/><stop offset="0.55" stop-color="#a8683a"/><stop offset="1" stop-color="#7d4a25"/>
+      </linearGradient>
+      <radialGradient id="capi-hocico" cx="0.3" cy="0.4" r="0.7">
+        <stop offset="0" stop-color="#a0602f"/><stop offset="1" stop-color="#a0602f" stop-opacity="0"/>
+      </radialGradient>
+    </defs>
     <g class="capi__cabeza">
-      <ellipse cx="72" cy="16" rx="5.5" ry="6.5" fill="#9a5f2f"/>
-      <ellipse cx="72" cy="17" rx="2.6" ry="3.4" fill="#5b3a21"/>
-      <path d="M84 34c-1-12-12-20-28-20H34C20 14 9 23 7 36c-1 9 4 16 12 20 9 4 22 6 36 6 15 0 27-5 29-17 1-4 0-8 0-11Z" fill="#c08048"/>
-      <path d="M30 18c8-2 22-2 32 0" fill="none" stroke="#d6a065" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
-      <ellipse cx="13" cy="38" rx="7" ry="8" fill="#a8693a"/>
-      <path d="M9 34q3-2 6 0" fill="none" stroke="#3b2414" stroke-width="2" stroke-linecap="round"/>
-      <path d="M12 49q7 5.5 15 1" fill="none" stroke="#3b2414" stroke-width="1.8" stroke-linecap="round"/>
-      <ellipse cx="46" cy="44" rx="7" ry="4" fill="#fb7185" opacity="0.3"/>
-      <!-- ojo de "side eye" relajado: párpado apenas caído y la pupila viendo hacia ti -->
+      <!-- pata trasera y patita de adelante -->
+      <ellipse cx="80" cy="103" rx="14" ry="11" fill="#7d4a25"/>
+      <path d="M36 98c-1 7 0 13 2 16h11c1-6 1-11 0-16Z" fill="#8a5430"/>
+      <ellipse cx="43" cy="114.5" rx="8" ry="3.2" fill="#4a2a14"/>
+      <!-- oreja (detrás de la cabeza) -->
+      <ellipse cx="76" cy="16" rx="5" ry="6.2" fill="#8a5430"/>
+      <ellipse cx="76" cy="17" rx="2.4" ry="3.6" fill="#4a2a14"/>
+      <!-- silueta de capibara real: cabeza larga, cuello grueso y pecho -->
+      <path d="M14 26C24 20 50 16 70 17c10 1 16 9 16 19 6 12 10 34 8 62-1 10-8 14-18 14H40c-8 0-12-6-10-16 1-14 4-26 10-34-10 0-22-4-28-10-6-6-6-18 2-26Z" fill="url(#capi-pelo)"/>
+      <!-- luces y sombras del pelaje -->
+      <path d="M22 22c14-4 32-5 46-3" fill="none" stroke="#dba06a" stroke-width="3" stroke-linecap="round" opacity="0.55"/>
+      <path d="M40 62c-6 10-8 22-7 34" fill="none" stroke="#d39a62" stroke-width="5" stroke-linecap="round" opacity="0.45"/>
+      <path d="M22 56c12 5 26 5 38-1" fill="none" stroke="#6b3d1e" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
+      <path d="M62 52l3 6M70 62l3 6M60 72l3 6M76 76l3 6M66 86l3 6" stroke="#6b3d1e" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
+      <!-- hocico chato con nariz y boca -->
+      <ellipse cx="16" cy="40" rx="12" ry="14" fill="url(#capi-hocico)"/>
+      <path d="M9 32q4-2.6 8-1" fill="none" stroke="#2a170b" stroke-width="2.2" stroke-linecap="round"/>
+      <path d="M8 47q7 3.5 14 2" fill="none" stroke="#4a2a14" stroke-width="1.6" stroke-linecap="round"/>
+      <ellipse cx="44" cy="42" rx="7" ry="4" fill="#fb7185" opacity="0.18"/>
+      <!-- ojo pequeño, arriba y atrás, mirando de reojo -->
       <g class="capi__ojos">
-        <ellipse cx="54" cy="28" rx="5.6" ry="4.8" fill="#fdf6ec"/>
-        <circle cx="57.4" cy="28.8" r="3.4" fill="#1f130a"/>
-        <circle cx="58.7" cy="27.5" r="1.2" fill="#fff"/>
-        <path d="M48.2 26.6c1.6-3.4 3.8-4.6 5.8-4.6s4.2 1.2 5.8 4.6c-1.8-.6-3.8-.9-5.8-.9s-4 .3-5.8.9Z" fill="#c08048"/>
-        <path d="M48.4 26.7q5.6-1.9 11.2 0" fill="none" stroke="#7c4a26" stroke-width="1.1" stroke-linecap="round"/>
+        <ellipse cx="56" cy="28" rx="3.8" ry="3.4" fill="#1a0f07"/>
+        <circle cx="57.6" cy="26.9" r="1.1" fill="#fff" opacity="0.9"/>
+        <path d="M51.6 26.4c1.4-2.6 3-3.4 4.4-3.4s3 .8 4.4 3.4c-1.4-.4-2.9-.6-4.4-.6s-3 .2-4.4.6Z" fill="#b57240"/>
+        <path d="M50 22.6q6-2.6 12 0" fill="none" stroke="#6b3d1e" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
       </g>
+      <!-- cinturón con pinzas y rodillo -->
+      <path d="M31 86c20 3 43 3 63-1v8c-20 4-43 4-63 1Z" fill="#5b3a21"/>
+      <rect x="54" y="85" width="10" height="10" rx="2" fill="#fbbf24"/>
+      <rect x="56.5" y="87.5" width="5" height="5" rx="1" fill="#5b3a21"/>
+      <rect x="33" y="92" width="12" height="11" rx="3" fill="#6b3d1e"/>
+      <path d="M37 92l-3-13M42 92l3-13" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
+      <path d="M34 79l2.5-6 2.5 6M45 79l-2.5-6-2.5 6" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linejoin="round"/>
+      <rect x="76" y="91" width="12" height="11" rx="3" fill="#6b3d1e"/>
+      <path d="M82 91V80h6" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linejoin="round"/>
+      <rect x="84" y="72" width="13" height="9" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
       <!-- lentes de sol (de perfil) -->
       <g class="capi__lentes">
-        <path d="M44 22h20l-1.5 9c-.6 3-3 4.5-6 4.5h-5c-4 0-7-2.6-7.5-6Z" fill="#0f172a"/>
-        <path d="M64 24l12-4" stroke="#0f172a" stroke-width="2.5" stroke-linecap="round"/>
-        <path d="M48 32l6-8M53 33l5-7" stroke="#38bdf8" stroke-width="1.8" stroke-linecap="round" opacity="0.85"/>
+        <path d="M47 22h18l-1.4 8.4c-.6 3-2.8 4.2-5.6 4.2h-4.6c-3.6 0-6.4-2.4-6.8-5.6Z" fill="#0f172a"/>
+        <path d="M65 24l11-4" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"/>
+        <path d="M51 31l5.5-7.5M55.5 32l4.5-6.5" stroke="#38bdf8" stroke-width="1.7" stroke-linecap="round" opacity="0.85"/>
       </g>
       <!-- casco de constructor -->
       <g class="capi__casco">
-        <path d="M28 18c2-11 12-16 24-16s22 5 24 15Z" fill="#facc15"/>
-        <path d="M52 2.5v14" stroke="#eab308" stroke-width="4"/>
-        <rect x="22" y="15" width="60" height="6" rx="3" fill="#eab308"/>
-        <path d="M34 9q5-4 11-5" fill="none" stroke="#fef9c3" stroke-width="2.5" stroke-linecap="round"/>
+        <path d="M36 18c2-10 11-15 22-15s20 5 22 14Z" fill="#facc15"/>
+        <path d="M58 3.5v13" stroke="#eab308" stroke-width="3.6"/>
+        <rect x="31" y="15" width="54" height="5.5" rx="2.75" fill="#eab308"/>
+        <path d="M42 9q5-4 10-4.5" fill="none" stroke="#fef9c3" stroke-width="2.3" stroke-linecap="round"/>
       </g>
     </g>
   </svg>`;
