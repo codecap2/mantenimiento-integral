@@ -184,10 +184,13 @@ capi.innerHTML = `
       <path d="M40 62c-6 10-8 22-7 34" fill="none" stroke="#d39a62" stroke-width="5" stroke-linecap="round" opacity="0.45"/>
       <path d="M22 56c12 5 26 5 38-1" fill="none" stroke="#6b3d1e" stroke-width="2" stroke-linecap="round" opacity="0.35"/>
       <path d="M62 52l3 6M70 62l3 6M60 72l3 6M76 76l3 6M66 86l3 6" stroke="#6b3d1e" stroke-width="1.2" stroke-linecap="round" opacity="0.3"/>
-      <!-- hocico chato con nariz y boca -->
-      <ellipse cx="16" cy="40" rx="12" ry="14" fill="url(#capi-hocico)"/>
-      <path d="M9 32q4-2.6 8-1" fill="none" stroke="#2a170b" stroke-width="2.2" stroke-linecap="round"/>
-      <path d="M8 47q7 3.5 14 2" fill="none" stroke="#4a2a14" stroke-width="1.6" stroke-linecap="round"/>
+      <!-- hocico redondito, como de caricatura -->
+      <circle cx="17" cy="39" r="15" fill="url(#capi-pelo)"/>
+      <ellipse cx="15" cy="40" rx="13" ry="13" fill="url(#capi-hocico)"/>
+      <path d="M8 27c5-3 12-3 17 0" fill="none" stroke="#dba06a" stroke-width="2.2" stroke-linecap="round" opacity="0.5"/>
+      <ellipse cx="8.5" cy="35" rx="5.2" ry="4" fill="#5b331a"/>
+      <ellipse cx="7.4" cy="33.8" rx="1.6" ry="1" fill="#a0704a" opacity="0.8"/>
+      <path d="M6 47q7 5 15 1.5" fill="none" stroke="#4a2a14" stroke-width="1.7" stroke-linecap="round"/>
       <ellipse cx="44" cy="42" rx="7" ry="4" fill="#fb7185" opacity="0.18"/>
       <!-- ojo pequeño, arriba y atrás, mirando de reojo -->
       <g class="capi__ojos">
