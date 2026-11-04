@@ -206,9 +206,20 @@ capi.innerHTML = `
       <path d="M31 86c20 3 43 3 63-1v8c-20 4-43 4-63 1Z" fill="#5b3a21"/>
       <rect x="54" y="85" width="10" height="10" rx="2" fill="#fbbf24"/>
       <rect x="56.5" y="87.5" width="5" height="5" rx="1" fill="#5b3a21"/>
+      <!-- pinzas de electricista: mordaza plateada, remache y mangos rojos -->
+      <g transform="translate(39 80) rotate(-10)">
+        <path d="M-4 -5C-5.2 3-6.4 9-6 15" fill="none" stroke="#dc2626" stroke-width="3.6" stroke-linecap="round"/>
+        <path d="M4 -5C4.8 3 5.8 9 6.6 15" fill="none" stroke="#dc2626" stroke-width="3.6" stroke-linecap="round"/>
+        <path d="M-4.4 -3C-5.2 3-5.8 8-5.6 12M4.4 -3C5 3 5.6 8 6 12" fill="none" stroke="#f87171" stroke-width="1" stroke-linecap="round" opacity="0.8"/>
+        <path d="M-3.4 -10.5h6.8l1.4 5.5h-9.6Z" fill="#cbd5e1" stroke="#64748b" stroke-width="0.6" stroke-linejoin="round"/>
+        <circle cx="0" cy="-12" r="3.3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.8"/>
+        <circle cx="0" cy="-12" r="1.2" fill="#94a3b8"/>
+        <path d="M-3.2 -14.4L-1.8 -23.5Q0 -25.6 1.8 -23.5L3.2 -14.4Z" fill="#e2e8f0" stroke="#64748b" stroke-width="0.6" stroke-linejoin="round"/>
+        <ellipse cx="0" cy="-17.6" rx="0.9" ry="2" fill="#475569"/>
+        <path d="M-1.2 -21.5h2.4M-1.4 -20h2.8" stroke="#94a3b8" stroke-width="0.5"/>
+        <path d="M0 -24.8v4.6" stroke="#64748b" stroke-width="0.5"/>
+      </g>
       <rect x="33" y="92" width="12" height="11" rx="3" fill="#6b3d1e"/>
-      <path d="M37 92l-3-13M42 92l3-13" stroke="#ef4444" stroke-width="3" stroke-linecap="round"/>
-      <path d="M34 79l2.5-6 2.5 6M45 79l-2.5-6-2.5 6" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linejoin="round"/>
       <rect x="76" y="91" width="12" height="11" rx="3" fill="#6b3d1e"/>
       <path d="M82 91V80h6" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linejoin="round"/>
       <rect x="84" y="72" width="13" height="9" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
