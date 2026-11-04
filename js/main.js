@@ -1,4 +1,4 @@
-// Mantenimientos Integrales · comportamiento de la página
+// Mantenimiento Integral · comportamiento de la página
 document.documentElement.classList.add("js");
 
 // El número no aparece escrito completo en el código para que los robots que

@@ -1,4 +1,4 @@
-// Mantenimientos Integrales · efectos visuales y sorpresas
+// Mantenimiento Integral · efectos visuales y sorpresas
 // Todo respeta "reducir movimiento" del sistema: si la persona lo pidió, no hay animaciones.
 const reducirMovimiento = matchMedia("(prefers-reduced-motion: reduce)").matches;
 const raiz = document.documentElement;
