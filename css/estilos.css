@@ -419,9 +419,16 @@ a { color: inherit; }
 /* Al final del tubo, una boquilla que apunta hacia abajo: de ahí sale el chorro */
 .cabecera-pagina .tubo--h::before {
   content: ""; position: absolute; right: 0; top: 0; width: var(--tubo-grosor); height: 46px;
-  background: var(--acero-v); border-radius: 3px 3px 6px 6px;
+  /* el agua baja por dentro de la boquilla y conecta con el chorro */
+  background:
+    repeating-linear-gradient(180deg, var(--color-agua-fuerte) 0, var(--color-agua) 20px, var(--color-agua-fuerte) 40px) 6px 0 / calc(var(--tubo-grosor) - 12px) 40px repeat-y,
+    var(--acero-v);
+  border-radius: 3px 3px 6px 6px;
   box-shadow: inset 0 -6px 0 #142a40;
+  animation: baja-boquilla 600ms linear infinite;
 }
+@keyframes baja-boquilla { from { background-position: 6px 0, 0 0; } to { background-position: 6px 40px, 0 0; } }
+.quieto .cabecera-pagina .tubo--h::before { animation-play-state: paused; }
 
 /* Chorro que cae desde la boquilla hasta la superficie del agua (lo acomoda js/efectos.js) */
 .chorro {
