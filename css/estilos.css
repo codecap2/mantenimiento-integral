@@ -741,7 +741,7 @@ a { color: inherit; }
 /* Capi, el capibara ayudante, a la izquierda del botón de WhatsApp */
 .capi {
   position: fixed; z-index: 61; right: calc(1rem + 64px); bottom: calc(0.6rem + env(safe-area-inset-bottom));
-  width: 68px; height: 85px; padding: 0; border: 0; background: none; cursor: pointer;
+  width: 56px; height: 70px; padding: 0; border: 0; background: none; cursor: pointer;
   filter: drop-shadow(0 6px 10px rgb(10 30 49 / 0.3));
 }
 .capi svg { width: 100%; height: 100%; overflow: visible; }
@@ -749,7 +749,7 @@ a { color: inherit; }
 .capi__ojos { transform-box: fill-box; transform-origin: center; animation: capi-parpadea 5s infinite; }
 .capi__casco { transform-box: view-box; transform-origin: 62px 30px; transition: transform 300ms ease; }
 /* Al pasar el cursor: sube la manita derecha y se baja los lentes */
-.capi__brazo { transform-box: view-box; transform-origin: 84px 96px; transition: transform 320ms cubic-bezier(0.3, 1.2, 0.5, 1); }
+.capi__brazo { transform-box: view-box; transform-origin: 88px 98px; transition: transform 320ms cubic-bezier(0.3, 1.2, 0.5, 1); }
 .capi__lentes { transform-box: view-box; transition: transform 320ms ease 120ms; }
 .capi:hover .capi__brazo, .capi:focus-visible .capi__brazo, .capi.saluda .capi__brazo { transform: rotate(-168deg); }
 .capi:hover .capi__lentes, .capi:focus-visible .capi__lentes, .capi.saluda .capi__lentes { transform: translateY(10px); }
@@ -767,7 +767,7 @@ a { color: inherit; }
 }
 .capi__globo.visible { opacity: 1; transform: none; }
 .quieto .capi__cabeza, .quieto .capi__ojos { animation-play-state: paused !important; }
-@media (max-width: 560px) { .capi { width: 58px; height: 72px; right: calc(1rem + 62px); } }
+@media (max-width: 560px) { .capi { width: 50px; height: 62px; right: calc(1rem + 62px); } }
 
 /* Easter egg: apagón (la luz de una linterna sigue al mouse) */
 .apagon {
