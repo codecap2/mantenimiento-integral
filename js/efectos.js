@@ -166,89 +166,75 @@ capi.innerHTML = `
         <stop offset="0" stop-color="#38bdf8"/><stop offset="0.5" stop-color="#0369a1"/><stop offset="1" stop-color="#0f172a"/>
       </linearGradient>
     </defs>
-    <g class="capi__cabeza">
-      <!-- rodillo de impermeabilizar con palo largo (más alto que Capi) -->
-      <rect x="12" y="3" width="30" height="11" rx="5" fill="#f8fafc" stroke="#94a3b8" stroke-width="1.4"/>
-      <path d="M16 6.5h22" stroke="#e2e8f0" stroke-width="1.4" stroke-linecap="round"/>
-      <path d="M27 14v6" stroke="#94a3b8" stroke-width="2.4" stroke-linecap="round"/>
-      <rect x="25.6" y="19" width="2.8" height="127" rx="1.4" fill="#a16207"/>
+    <g class="capi__cabeza" stroke="#5b3a21" stroke-width="2.4" stroke-linejoin="round" stroke-linecap="round">
+      <!-- rodillo de impermeabilizar con palo largo -->
+      <rect x="10" y="4" width="28" height="11" rx="5" fill="#f8fafc"/>
+      <path d="M24 15v6" fill="none"/>
+      <rect x="22.6" y="20" width="3" height="126" rx="1.5" fill="#d4a373" stroke-width="1.8"/>
       <!-- patitas -->
-      <rect x="47" y="126" width="12" height="15" rx="5.5" fill="#b07a4f"/>
-      <rect x="65" y="126" width="12" height="15" rx="5.5" fill="#b07a4f"/>
-      <ellipse cx="53" cy="142" rx="8.5" ry="4.2" fill="#8a5430"/>
-      <ellipse cx="71" cy="142" rx="8.5" ry="4.2" fill="#8a5430"/>
-      <!-- cuerpo con playerita azul marino y el logo -->
-      <path d="M40 94c0-9 9-14 22-14s22 5 22 14v30c0 5-4 8-10 8H50c-6 0-10-3-10-8Z" fill="#c98c52"/>
-      <path d="M40 94c0-9 9-14 22-14s22 5 22 14v22H40Z" fill="#173a5c"/>
-      <path d="M40 92l-6 6 4 5 4-3ZM84 92l6 6-4 5-4-3Z" fill="#173a5c"/>
-      <path d="M54 81q8 5 16 0" fill="none" stroke="#0f2a44" stroke-width="2"/>
-      <g transform="translate(55 90) scale(0.44)">
-        <path d="M4 15 16 5l12 10" fill="none" stroke="#fff" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round"/>
-        <path d="M8 13v13h16V13" fill="none" stroke="#fff" stroke-width="2.8" stroke-linejoin="round"/>
+      <ellipse cx="50" cy="139" rx="10" ry="6" fill="#c8956a"/>
+      <ellipse cx="74" cy="139" rx="10" ry="6" fill="#c8956a"/>
+      <!-- cuerpo chaparrito -->
+      <path d="M40 98c0-8 9-12 22-12s22 4 22 12v28c0 7-6 11-22 11s-22-4-22-11Z" fill="#c8956a"/>
+      <!-- bracito con el que sostiene el rodillo (colgando, igual que el otro) -->
+      <path d="M40 96c-6 3-9 10-10 18 0 4 6 5 8 1 1-5 3-9 5-12Z" fill="#c8956a"/>
+      <!-- playera con el logo -->
+      <path d="M41 94c5-5 12-7 21-7s16 2 21 7l7 8-5 5-3-2v14H42v-14l-3 2-5-5Z" fill="#173a5c"/>
+      <path d="M55 88q7 5 14 0" fill="none" stroke="#5b3a21" stroke-width="1.8"/>
+      <g transform="translate(55.5 95) scale(0.42)" stroke="none">
+        <path d="M4 15 16 5l12 10" fill="none" stroke="#fff" stroke-width="3"/>
+        <path d="M8 13v13h16V13" fill="none" stroke="#fff" stroke-width="3"/>
         <path d="M16 15.5s-3 3.2-3 5.3a3 3 0 0 0 6 0c0-2.1-3-5.3-3-5.3Z" fill="#38bdf8"/>
       </g>
-      <!-- cinturón -->
-      <rect x="39" y="114" width="46" height="6.5" rx="3" fill="#5b3a21"/>
-      <rect x="58" y="113" width="8" height="8.5" rx="1.5" fill="#fbbf24"/>
-      <rect x="60.2" y="115.2" width="3.6" height="4" rx="0.8" fill="#5b3a21"/>
-      <!-- pinzas de electricista pequeñas -->
-      <g transform="translate(46 121) scale(0.55)">
-        <path d="M-4 -5C-5.2 3-6.4 9-6 15" fill="none" stroke="#dc2626" stroke-width="3.6" stroke-linecap="round"/>
-        <path d="M4 -5C4.8 3 5.8 9 6.6 15" fill="none" stroke="#dc2626" stroke-width="3.6" stroke-linecap="round"/>
-        <path d="M-3.4 -10.5h6.8l1.4 5.5h-9.6Z" fill="#cbd5e1" stroke="#64748b" stroke-width="0.6"/>
-        <circle cx="0" cy="-12" r="3.3" fill="#e2e8f0" stroke="#94a3b8" stroke-width="0.8"/>
-        <circle cx="0" cy="-12" r="1.2" fill="#94a3b8"/>
-        <path d="M-3.2 -14.4L-1.8 -23.5Q0 -25.6 1.8 -23.5L3.2 -14.4Z" fill="#e2e8f0" stroke="#64748b" stroke-width="0.6"/>
-        <ellipse cx="0" cy="-17.6" rx="0.9" ry="2" fill="#475569"/>
+      <!-- cinturón con pinzas (izquierda) y llave Stillson roja (derecha) -->
+      <rect x="40" y="118" width="44" height="6" rx="2.5" fill="#7c4a26" stroke-width="1.8"/>
+      <rect x="58.5" y="117" width="7" height="8" rx="1.5" fill="#fbbf24" stroke-width="1.6"/>
+      <g transform="translate(47 126) scale(0.5)" stroke-width="1.2">
+        <path d="M-4 -5C-5.2 3-6.4 9-6 15M4 -5C4.8 3 5.8 9 6.6 15" fill="none" stroke="#dc2626" stroke-width="3.6"/>
+        <path d="M-3.4 -10.5h6.8l1.4 5.5h-9.6Z" fill="#cbd5e1"/>
+        <circle cx="0" cy="-12" r="3.3" fill="#e2e8f0"/>
+        <path d="M-3.2 -14.4L-1.8 -23.5Q0 -25.6 1.8 -23.5L3.2 -14.4Z" fill="#e2e8f0"/>
       </g>
-      <!-- llave Stillson roja -->
-      <g transform="translate(78 108)">
-        <rect x="-2.4" y="6" width="4.8" height="22" rx="2" fill="#dc2626"/>
-        <path d="M-1 9v16" stroke="#f87171" stroke-width="1" stroke-linecap="round"/>
-        <path d="M-4.5 -2h9v4.5h-3.2v3.5h-5.8Z" fill="#cbd5e1" stroke="#64748b" stroke-width="0.6" stroke-linejoin="round"/>
-        <path d="M-4.5 -2l-1.5-3h7l1 3" fill="#94a3b8"/>
+      <g transform="translate(77 112)" stroke-width="1.4">
+        <rect x="-2.4" y="6" width="4.8" height="20" rx="2" fill="#dc2626"/>
+        <path d="M-4.5 -2h9v4.5h-3.2v3.5h-5.8Z" fill="#cbd5e1"/>
         <rect x="-3" y="4.6" width="6" height="2.6" rx="0.8" fill="#64748b"/>
       </g>
-      <!-- brazo izquierdo: sostiene el palo del rodillo a media altura -->
-      <path d="M43 90L31 100" stroke="#b87d52" stroke-width="9" stroke-linecap="round"/>
-      <circle cx="28.5" cy="101" r="5.2" fill="#c98c52"/>
-      <path d="M25 99.5h7" stroke="#9a6238" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
+      <!-- manita que sostiene el palo -->
+      <circle cx="33" cy="115" r="5" fill="#c8956a"/>
       <!-- orejitas -->
-      <ellipse cx="33" cy="33" rx="5.5" ry="6.5" fill="#a8693a"/><ellipse cx="33" cy="34" rx="2.6" ry="3.4" fill="#7a4a26"/>
-      <ellipse cx="91" cy="33" rx="5.5" ry="6.5" fill="#a8693a"/><ellipse cx="91" cy="34" rx="2.6" ry="3.4" fill="#7a4a26"/>
-      <!-- cabeza de frente: ancha y cuadradita, de capibara -->
-      <path d="M26 50c0-14 10-22 36-22s36 8 36 22v14c0 12-10 19-36 19S26 76 26 64Z" fill="#c98c52"/>
-      <path d="M38 36c8-4 40-4 48 0" fill="none" stroke="#d9a06b" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
-      <path d="M58 33v4M62 32v4M66 33v4" stroke="#a8693a" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
-      <!-- hocico ancho con la nariz cuadradita encima -->
-      <path d="M44 62c0-6 7-9 18-9s18 3 18 9v6c0 7-7 11-18 11s-18-4-18-11Z" fill="#a4683b"/>
-      <path d="M53 57.5c0-2.4 3.6-3.5 9-3.5s9 1.1 9 3.5c0 3.4-4.4 5.5-9 5.5s-9-2.1-9-5.5Z" fill="#4a2a14"/>
-      <ellipse cx="59" cy="56.4" rx="2.4" ry="1" fill="#8a5a3a" opacity="0.8"/>
-      <path d="M62 63v3.5M55.5 68q3.2 3.4 6.5 0q3.3 3.4 6.5 0" fill="none" stroke="#3b2414" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-      <ellipse cx="36" cy="64" rx="6" ry="4" fill="#fb7185" opacity="0.35"/>
-      <ellipse cx="88" cy="64" rx="6" ry="4" fill="#fb7185" opacity="0.35"/>
-      <g class="capi__ojos">
-        <circle cx="45" cy="47" r="3.6" fill="#1a0f07"/><circle cx="46.3" cy="45.7" r="1.3" fill="#fff"/>
-        <circle cx="79" cy="47" r="3.6" fill="#1a0f07"/><circle cx="80.3" cy="45.7" r="1.3" fill="#fff"/>
+      <circle cx="38" cy="30" r="7" fill="#c8956a"/><circle cx="38" cy="31" r="3.2" fill="#a8714b" stroke="none"/>
+      <circle cx="86" cy="30" r="7" fill="#c8956a"/><circle cx="86" cy="31" r="3.2" fill="#a8714b" stroke="none"/>
+      <!-- cabeza redondita -->
+      <path d="M28 55c0-20 13-30 34-30s34 10 34 30c0 18-13 29-34 29S28 73 28 55Z" fill="#c8956a"/>
+      <path d="M56 32l1 4M62 31v4M68 32l-1 4" fill="none" stroke-width="1.6" opacity="0.7"/>
+      <!-- hocico oscuro con naricita y sonrisa -->
+      <ellipse cx="62" cy="65" rx="14" ry="11.5" fill="#a8714b"/>
+      <ellipse cx="62" cy="59.5" rx="6" ry="4.2" fill="#5b3a21" stroke="none"/>
+      <path d="M62 63.5v3M56.5 67q2.8 3 5.5 0q2.7 3 5.5 0" fill="none" stroke-width="1.8"/>
+      <ellipse cx="38" cy="63" rx="6" ry="4" fill="#f4a58a" stroke="none" opacity="0.7"/>
+      <ellipse cx="86" cy="63" rx="6" ry="4" fill="#f4a58a" stroke="none" opacity="0.7"/>
+      <g class="capi__ojos" stroke="none">
+        <circle cx="46" cy="50" r="4" fill="#3b2414"/><circle cx="47.3" cy="48.6" r="1.3" fill="#fff"/>
+        <circle cx="78" cy="50" r="4" fill="#3b2414"/><circle cx="79.3" cy="48.6" r="1.3" fill="#fff"/>
       </g>
       <!-- lentes de sol de espejo -->
-      <g class="capi__lentes">
-        <rect x="35" y="40" width="20" height="13" rx="5" fill="url(#capi-espejo)" stroke="#0f172a" stroke-width="1.6"/>
-        <rect x="69" y="40" width="20" height="13" rx="5" fill="url(#capi-espejo)" stroke="#0f172a" stroke-width="1.6"/>
-        <path d="M55 44.5h14M35 43l-8-2M89 43l8-2" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
-        <path d="M39 50l5-7M44 51l4-5.5M73 50l5-7M78 51l4-5.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity="0.8"/>
+      <g class="capi__lentes" stroke="#0f172a" stroke-width="1.6">
+        <rect x="36" y="43" width="20" height="13" rx="5" fill="url(#capi-espejo)"/>
+        <rect x="68" y="43" width="20" height="13" rx="5" fill="url(#capi-espejo)"/>
+        <path d="M56 47.5h12M36 46l-7-2M88 46l7-2" fill="none" stroke-width="1.8"/>
+        <path d="M40 53l5-7M45 54l4-5.5M72 53l5-7M77 54l4-5.5" fill="none" stroke="#fff" stroke-width="1.3" opacity="0.8"/>
       </g>
       <!-- casco de constructor -->
-      <g class="capi__casco">
-        <path d="M36 30c2-14 13-21 26-21s24 7 26 21Z" fill="#facc15"/>
-        <path d="M62 9.5v19" stroke="#eab308" stroke-width="4"/>
-        <rect x="29" y="27" width="66" height="6" rx="3" fill="#eab308"/>
-        <path d="M44 18q6-6 13-7" fill="none" stroke="#fef9c3" stroke-width="2.5" stroke-linecap="round"/>
+      <g class="capi__casco" stroke-width="2">
+        <path d="M38 30c2-13 12-19 24-19s22 6 24 19Z" fill="#facc15"/>
+        <path d="M62 11.5v17" fill="none" stroke="#eab308" stroke-width="3.6"/>
+        <rect x="31" y="27.5" width="62" height="5.5" rx="2.75" fill="#eab308"/>
       </g>
-      <!-- brazo derecho: relajado; con el cursor sube a bajarse los lentes -->
+      <!-- la otra manita: colgando tranquila; con el cursor sube a bajarse los lentes -->
       <g class="capi__brazo">
-        <path d="M81 90L87 111" stroke="#b87d52" stroke-width="9" stroke-linecap="round"/>
-        <circle cx="88" cy="113" r="5.2" fill="#c98c52"/>
+        <path d="M84 95c6 3 9 11 10 19 0 4-6 5-8 1-1-5-3-9-5-12Z" fill="#c8956a"/>
+        <circle cx="91" cy="116" r="5" fill="#c8956a"/>
       </g>
     </g>
   </svg>`;

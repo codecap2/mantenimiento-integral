@@ -747,11 +747,11 @@ a { color: inherit; }
 .capi svg { width: 100%; height: 100%; overflow: visible; }
 .capi__cabeza { transform-box: view-box; transform-origin: 62px 146px; animation: capi-respira 4s ease-in-out infinite; }
 .capi__ojos { transform-box: fill-box; transform-origin: center; animation: capi-parpadea 5s infinite; }
-.capi__casco { transform-box: view-box; transform-origin: 62px 28px; transition: transform 300ms ease; }
+.capi__casco { transform-box: view-box; transform-origin: 62px 30px; transition: transform 300ms ease; }
 /* Al pasar el cursor: sube la manita derecha y se baja los lentes */
-.capi__brazo { transform-box: view-box; transform-origin: 81px 90px; transition: transform 320ms cubic-bezier(0.3, 1.2, 0.5, 1); }
+.capi__brazo { transform-box: view-box; transform-origin: 84px 96px; transition: transform 320ms cubic-bezier(0.3, 1.2, 0.5, 1); }
 .capi__lentes { transform-box: view-box; transition: transform 320ms ease 120ms; }
-.capi:hover .capi__brazo, .capi:focus-visible .capi__brazo, .capi.saluda .capi__brazo { transform: rotate(-160deg); }
+.capi:hover .capi__brazo, .capi:focus-visible .capi__brazo, .capi.saluda .capi__brazo { transform: rotate(-168deg); }
 .capi:hover .capi__lentes, .capi:focus-visible .capi__lentes, .capi.saluda .capi__lentes { transform: translateY(10px); }
 .capi:hover .capi__casco, .capi:focus-visible .capi__casco { transform: rotate(-4deg) translateY(-1px); }
 .capi.saluda .capi__cabeza { animation: capi-saluda 700ms ease; }
