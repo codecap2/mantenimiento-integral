@@ -214,27 +214,29 @@ capi.innerHTML = `
       <circle cx="28.5" cy="101" r="5.2" fill="#c98c52"/>
       <path d="M25 99.5h7" stroke="#9a6238" stroke-width="1" stroke-linecap="round" opacity="0.6"/>
       <!-- orejitas -->
-      <circle cx="37" cy="31" r="7.5" fill="#b07a4f"/><circle cx="37" cy="31" r="3.8" fill="#8a5430"/>
-      <circle cx="87" cy="31" r="7.5" fill="#b07a4f"/><circle cx="87" cy="31" r="3.8" fill="#8a5430"/>
-      <!-- cabeza de frente -->
-      <rect x="30" y="27" width="64" height="56" rx="27" fill="#c98c52"/>
-      <ellipse cx="62" cy="38" rx="20" ry="6" fill="#d9a06b" opacity="0.6"/>
-      <ellipse cx="62" cy="66" rx="15" ry="12" fill="#9a6238"/>
-      <ellipse cx="62" cy="60" rx="5.5" ry="3.8" fill="#3b2414"/>
-      <ellipse cx="60.5" cy="59" rx="1.6" ry="0.9" fill="#a0704a" opacity="0.8"/>
-      <path d="M56 67q3 4 6 0q3 4 6 0" fill="none" stroke="#3b2414" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
-      <ellipse cx="40" cy="64" rx="6" ry="4" fill="#fb7185" opacity="0.35"/>
-      <ellipse cx="84" cy="64" rx="6" ry="4" fill="#fb7185" opacity="0.35"/>
+      <ellipse cx="33" cy="33" rx="5.5" ry="6.5" fill="#a8693a"/><ellipse cx="33" cy="34" rx="2.6" ry="3.4" fill="#7a4a26"/>
+      <ellipse cx="91" cy="33" rx="5.5" ry="6.5" fill="#a8693a"/><ellipse cx="91" cy="34" rx="2.6" ry="3.4" fill="#7a4a26"/>
+      <!-- cabeza de frente: ancha y cuadradita, de capibara -->
+      <path d="M26 50c0-14 10-22 36-22s36 8 36 22v14c0 12-10 19-36 19S26 76 26 64Z" fill="#c98c52"/>
+      <path d="M38 36c8-4 40-4 48 0" fill="none" stroke="#d9a06b" stroke-width="3" stroke-linecap="round" opacity="0.7"/>
+      <path d="M58 33v4M62 32v4M66 33v4" stroke="#a8693a" stroke-width="1.3" stroke-linecap="round" opacity="0.7"/>
+      <!-- hocico ancho con la nariz cuadradita encima -->
+      <path d="M44 62c0-6 7-9 18-9s18 3 18 9v6c0 7-7 11-18 11s-18-4-18-11Z" fill="#a4683b"/>
+      <path d="M53 57.5c0-2.4 3.6-3.5 9-3.5s9 1.1 9 3.5c0 3.4-4.4 5.5-9 5.5s-9-2.1-9-5.5Z" fill="#4a2a14"/>
+      <ellipse cx="59" cy="56.4" rx="2.4" ry="1" fill="#8a5a3a" opacity="0.8"/>
+      <path d="M62 63v3.5M55.5 68q3.2 3.4 6.5 0q3.3 3.4 6.5 0" fill="none" stroke="#3b2414" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round"/>
+      <ellipse cx="36" cy="64" rx="6" ry="4" fill="#fb7185" opacity="0.35"/>
+      <ellipse cx="88" cy="64" rx="6" ry="4" fill="#fb7185" opacity="0.35"/>
       <g class="capi__ojos">
-        <circle cx="48" cy="50" r="3.9" fill="#1a0f07"/><circle cx="49.4" cy="48.6" r="1.4" fill="#fff"/>
-        <circle cx="76" cy="50" r="3.9" fill="#1a0f07"/><circle cx="77.4" cy="48.6" r="1.4" fill="#fff"/>
+        <circle cx="45" cy="47" r="3.6" fill="#1a0f07"/><circle cx="46.3" cy="45.7" r="1.3" fill="#fff"/>
+        <circle cx="79" cy="47" r="3.6" fill="#1a0f07"/><circle cx="80.3" cy="45.7" r="1.3" fill="#fff"/>
       </g>
       <!-- lentes de sol de espejo -->
       <g class="capi__lentes">
-        <rect x="38" y="43" width="20" height="13" rx="5" fill="url(#capi-espejo)" stroke="#0f172a" stroke-width="1.6"/>
-        <rect x="66" y="43" width="20" height="13" rx="5" fill="url(#capi-espejo)" stroke="#0f172a" stroke-width="1.6"/>
-        <path d="M58 47.5h8M38 46l-6-2M86 46l6-2" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
-        <path d="M42 53l5-7M47 54l4-5.5M70 53l5-7M75 54l4-5.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity="0.8"/>
+        <rect x="35" y="40" width="20" height="13" rx="5" fill="url(#capi-espejo)" stroke="#0f172a" stroke-width="1.6"/>
+        <rect x="69" y="40" width="20" height="13" rx="5" fill="url(#capi-espejo)" stroke="#0f172a" stroke-width="1.6"/>
+        <path d="M55 44.5h14M35 43l-8-2M89 43l8-2" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M39 50l5-7M44 51l4-5.5M73 50l5-7M78 51l4-5.5" stroke="#fff" stroke-width="1.4" stroke-linecap="round" opacity="0.8"/>
       </g>
       <!-- casco de constructor -->
       <g class="capi__casco">
