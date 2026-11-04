@@ -165,6 +165,9 @@ capi.innerHTML = `
       <linearGradient id="capi-pelo" x1="0" y1="0" x2="1" y2="1">
         <stop offset="0" stop-color="#c98c52"/><stop offset="0.55" stop-color="#a8683a"/><stop offset="1" stop-color="#7d4a25"/>
       </linearGradient>
+      <linearGradient id="capi-espejo" x1="0" y1="0" x2="0" y2="1">
+        <stop offset="0" stop-color="#38bdf8"/><stop offset="0.5" stop-color="#0369a1"/><stop offset="1" stop-color="#0f172a"/>
+      </linearGradient>
       <radialGradient id="capi-hocico" cx="0.3" cy="0.4" r="0.7">
         <stop offset="0" stop-color="#a0602f"/><stop offset="1" stop-color="#a0602f" stop-opacity="0"/>
       </radialGradient>
@@ -191,7 +194,7 @@ capi.innerHTML = `
       <ellipse cx="8.5" cy="35" rx="5.2" ry="4" fill="#5b331a"/>
       <ellipse cx="7.4" cy="33.8" rx="1.6" ry="1" fill="#a0704a" opacity="0.8"/>
       <path d="M6 47q7 5 15 1.5" fill="none" stroke="#4a2a14" stroke-width="1.7" stroke-linecap="round"/>
-      <ellipse cx="44" cy="42" rx="7" ry="4" fill="#fb7185" opacity="0.18"/>
+      
       <!-- ojo pequeño, arriba y atrás, mirando de reojo -->
       <g class="capi__ojos">
         <ellipse cx="56" cy="28" rx="3.8" ry="3.4" fill="#1a0f07"/>
@@ -211,16 +214,16 @@ capi.innerHTML = `
       <rect x="84" y="72" width="13" height="9" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
       <!-- lentes de sol (de perfil) -->
       <g class="capi__lentes">
-        <path d="M47 22h18l-1.4 8.4c-.6 3-2.8 4.2-5.6 4.2h-4.6c-3.6 0-6.4-2.4-6.8-5.6Z" fill="#0f172a"/>
-        <path d="M65 24l11-4" stroke="#0f172a" stroke-width="2.4" stroke-linecap="round"/>
-        <path d="M51 31l5.5-7.5M55.5 32l4.5-6.5" stroke="#38bdf8" stroke-width="1.7" stroke-linecap="round" opacity="0.85"/>
+        <path d="M48 22.5h16l-1.3 7.4c-.5 2.6-2.5 3.7-5 3.7h-3.8c-3.2 0-5.6-2.1-6-4.9Z" fill="url(#capi-espejo)" stroke="#0f172a" stroke-width="1.4" stroke-linejoin="round"/>
+        <path d="M64 24.2l11-3.6" stroke="#0f172a" stroke-width="1.8" stroke-linecap="round"/>
+        <path d="M51.5 30.5l4.6-6.4M55.6 31.4l3.6-5" stroke="#fff" stroke-width="1.5" stroke-linecap="round" opacity="0.8"/>
       </g>
       <!-- casco de constructor -->
       <g class="capi__casco">
-        <path d="M36 18c2-10 11-15 22-15s20 5 22 14Z" fill="#facc15"/>
-        <path d="M58 3.5v13" stroke="#eab308" stroke-width="3.6"/>
-        <rect x="31" y="15" width="54" height="5.5" rx="2.75" fill="#eab308"/>
-        <path d="M42 9q5-4 10-4.5" fill="none" stroke="#fef9c3" stroke-width="2.3" stroke-linecap="round"/>
+        <path d="M40 17.5c1.6-8.6 9.4-12.6 18.6-12.6s17 4 18.4 12Z" fill="#facc15"/>
+        <path d="M58.6 5.2v11.4" stroke="#eab308" stroke-width="3.2"/>
+        <rect x="36" y="15" width="46" height="4.6" rx="2.3" fill="#eab308"/>
+        <path d="M45.5 10q4.5-3.4 9-4" fill="none" stroke="#fef9c3" stroke-width="2" stroke-linecap="round"/>
       </g>
     </g>
   </svg>`;
