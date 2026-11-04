@@ -159,25 +159,22 @@ a { color: inherit; }
 /* Tubería decorativa (bajo el encabezado y sobre el pie): acero, juntas y agua corriendo */
 .tubo-linea { position: relative; height: 22px; overflow: hidden; }
 /* Bajo el encabezado siempre viene una portada oscura: el borde inferior se funde con ella */
-.encabezado .tubo-linea { background: linear-gradient(180deg, transparent 50%, var(--color-marino) 50%); }
+.encabezado .tubo-linea { background: var(--acero-h) 0 3px / 100% calc(100% - 6px) no-repeat, linear-gradient(180deg, transparent 50%, var(--color-marino) 50%); }
+/* Tres capas: el acero (fondo del elemento), el agua que corre (::before) y las juntas fijas (::after) */
+.tubo-linea { background: var(--acero-h) 0 3px / 100% calc(100% - 6px) no-repeat; }
 .tubo-linea::before {
-  /* el tubo de acero */
-  content: ""; position: absolute; left: 0; right: 0; top: 3px; bottom: 3px; background: var(--acero-h);
-}
-.tubo-linea::after {
-  /* el agua por dentro y las juntas cada cierto tramo */
-  content: ""; position: absolute; inset: 0;
-  background-image:
-    repeating-linear-gradient(90deg, transparent 0 224px, #22405e 224px 226px, #9fb7cf 226px 232px, #22405e 232px 240px),
-    repeating-linear-gradient(90deg, var(--color-agua-fuerte) 0, var(--color-agua) 20px, #7dd3fc 26px, var(--color-agua-fuerte) 40px);
-  background-size: 240px 100%, 40px 8px;
-  background-repeat: repeat-x, repeat-x;
-  background-position: 0 0, 0 center;
+  content: ""; position: absolute; left: 0; right: 0; top: 7px; bottom: 7px;
+  background-image: repeating-linear-gradient(90deg, var(--color-agua-fuerte) 0, var(--color-agua) 20px, #7dd3fc 26px, var(--color-agua-fuerte) 40px);
+  background-size: 40px 100%;
   animation: corre-tubo 1.6s linear infinite, llenar-h 1200ms ease-out 200ms backwards;
   transform-origin: left;
 }
-.pie .tubo-linea::after { animation-direction: reverse, normal; transform-origin: right; }
-@keyframes corre-tubo { from { background-position: 0 0, 0 center; } to { background-position: 0 0, 40px center; } }
+.tubo-linea::after {
+  content: ""; position: absolute; inset: 0;
+  background: repeating-linear-gradient(90deg, transparent 0 224px, #22405e 224px 226px, #9fb7cf 226px 232px, #22405e 232px 240px);
+}
+.pie .tubo-linea::before { animation-direction: reverse, normal; transform-origin: right; }
+@keyframes corre-tubo { from { background-position: 0 0; } to { background-position: 40px 0; } }
 
 /* Cable eléctrico decorativo (pie): pulsos de luz que corren */
 .cable-linea { position: relative; height: 10px; background: linear-gradient(180deg, #24384d, #0a1520 60%, #050b12); overflow: hidden; }
@@ -191,7 +188,7 @@ a { color: inherit; }
 @keyframes corre-cable { to { background-position: 80px 0; } }
 
 /* Pausa global: detiene lo que se mueve solo */
-.quieto .tubo-linea::after, .quieto .cable-linea::after,
+.quieto .tubo-linea::before, .quieto .cable-linea::after,
 .quieto .agua-fondo::before, .quieto .agua-fondo::after, .quieto .agua-fondo span,
 .quieto .patito, .quieto .patito svg { animation-play-state: paused !important; }
 .pausa-global {
