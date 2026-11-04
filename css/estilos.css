@@ -753,7 +753,7 @@ a { color: inherit; }
 .capi__casco { transform-box: view-box; transform-origin: 59px 16px; transition: transform 300ms ease; }
 /* Al pasar el mouse, Capi se baja los lentes y deja ver sus ojitos */
 .capi__lentes { transform-box: view-box; transform-origin: 56px 28px; transition: transform 350ms cubic-bezier(0.3, 1.3, 0.5, 1); }
-.capi:hover .capi__lentes, .capi:focus-visible .capi__lentes { transform: translate(-15px, 7px) rotate(-14deg); }
+.capi:hover .capi__lentes, .capi:focus-visible .capi__lentes { transform: translate(-6px, 6px) rotate(-8deg); }
 .capi:hover .capi__casco, .capi:focus-visible .capi__casco { transform: rotate(-6deg) translateY(-1px); }
 .capi.saluda .capi__cabeza { animation: capi-saluda 700ms ease; }
 @keyframes capi-respira { 0%, 100% { transform: rotate(0); } 50% { transform: rotate(-2.5deg); } }
@@ -770,7 +770,7 @@ a { color: inherit; }
 .quieto .capi__cabeza, .quieto .capi__ojos { animation-play-state: paused !important; }
 @media (max-width: 560px) { .capi { width: 54px; height: 65px; right: calc(1rem + 62px); } }
 /* En celulares no hay mouse: al tocarlo también se baja los lentes un momento */
-.capi.saluda .capi__lentes { transform: translate(-15px, 7px) rotate(-14deg); }
+.capi.saluda .capi__lentes { transform: translate(-6px, 6px) rotate(-8deg); }
 
 /* Easter egg: apagón (la luz de una linterna sigue al mouse) */
 .apagon {

@@ -174,12 +174,13 @@ capi.innerHTML = `
     </defs>
     <g class="capi__cabeza">
       <!-- pata trasera y patita de adelante -->
-      <ellipse cx="80" cy="103" rx="14" ry="11" fill="#7d4a25"/>
-      <path d="M36 98c-1 7 0 13 2 16h11c1-6 1-11 0-16Z" fill="#8a5430"/>
-      <ellipse cx="43" cy="114.5" rx="8" ry="3.2" fill="#4a2a14"/>
-      <!-- oreja (detrás de la cabeza) -->
-      <ellipse cx="76" cy="16" rx="5" ry="6.2" fill="#8a5430"/>
-      <ellipse cx="76" cy="17" rx="2.4" ry="3.6" fill="#4a2a14"/>
+      <rect x="68" y="98" width="13" height="16" rx="6" fill="#7d4a25"/>
+      <ellipse cx="75" cy="114.5" rx="8" ry="3.4" fill="#4a2a14"/>
+      <rect x="38" y="98" width="13" height="16" rx="6" fill="#8a5430"/>
+      <ellipse cx="44" cy="114.5" rx="8" ry="3.4" fill="#4a2a14"/>
+      <!-- oreja (atrás de la cabeza, sin atravesar el casco) -->
+      <ellipse cx="84" cy="24" rx="4.6" ry="5.8" fill="#8a5430" transform="rotate(20 84 24)"/>
+      <ellipse cx="84.6" cy="24.6" rx="2.2" ry="3.4" fill="#4a2a14" transform="rotate(20 84 24)"/>
       <!-- silueta de capibara real: cabeza larga, cuello grueso y pecho -->
       <path d="M14 26C24 20 50 16 70 17c10 1 16 9 16 19 6 12 10 34 8 62-1 10-8 14-18 14H40c-8 0-12-6-10-16 1-14 4-26 10-34-10 0-22-4-28-10-6-6-6-18 2-26Z" fill="url(#capi-pelo)"/>
       <!-- luces y sombras del pelaje -->
@@ -195,12 +196,11 @@ capi.innerHTML = `
       <ellipse cx="7.4" cy="33.8" rx="1.6" ry="1" fill="#a0704a" opacity="0.8"/>
       <path d="M6 47q7 5 15 1.5" fill="none" stroke="#4a2a14" stroke-width="1.7" stroke-linecap="round"/>
       
-      <!-- ojo pequeño, arriba y atrás, mirando de reojo -->
+      <!-- ojo oscuro y redondito con brillo, como de capibara real -->
       <g class="capi__ojos">
-        <ellipse cx="56" cy="28" rx="3.8" ry="3.4" fill="#1a0f07"/>
-        <circle cx="57.6" cy="26.9" r="1.1" fill="#fff" opacity="0.9"/>
-        <path d="M51.6 26.4c1.4-2.6 3-3.4 4.4-3.4s3 .8 4.4 3.4c-1.4-.4-2.9-.6-4.4-.6s-3 .2-4.4.6Z" fill="#b57240"/>
-        <path d="M50 22.6q6-2.6 12 0" fill="none" stroke="#6b3d1e" stroke-width="1" stroke-linecap="round" opacity="0.5"/>
+        <ellipse cx="56" cy="28" rx="3.6" ry="3.9" fill="#1a0f07"/>
+        <circle cx="57.4" cy="26.6" r="1.35" fill="#fff"/>
+        <circle cx="55" cy="29.6" r="0.6" fill="#fff" opacity="0.6"/>
       </g>
       <!-- cinturón con pinzas y rodillo -->
       <path d="M31 86c20 3 43 3 63-1v8c-20 4-43 4-63 1Z" fill="#5b3a21"/>
@@ -220,9 +220,18 @@ capi.innerHTML = `
         <path d="M0 -24.8v4.6" stroke="#64748b" stroke-width="0.5"/>
       </g>
       <rect x="33" y="92" width="12" height="11" rx="3" fill="#6b3d1e"/>
+      <!-- desarmador en el bolsillo de atrás -->
+      <rect x="79.6" y="76" width="4.8" height="15" rx="2" fill="#f59e0b"/>
+      <path d="M79.6 80h4.8M79.6 84h4.8" stroke="#1e293b" stroke-width="1.2"/>
+      <rect x="81.2" y="71" width="1.6" height="5.5" rx="0.6" fill="#cbd5e1"/>
       <rect x="76" y="91" width="12" height="11" rx="3" fill="#6b3d1e"/>
-      <path d="M82 91V80h6" fill="none" stroke="#94a3b8" stroke-width="2.2" stroke-linejoin="round"/>
-      <rect x="84" y="72" width="13" height="9" rx="4" fill="#e2e8f0" stroke="#94a3b8" stroke-width="1.5"/>
+      <!-- rodillo de impermeabilizar, sostenido con su manita y apoyado en el piso -->
+      <rect x="4" y="105" width="20" height="9" rx="4" fill="#f1f5f9" stroke="#94a3b8" stroke-width="1.2"/>
+      <path d="M7 107.5h14" stroke="#cbd5e1" stroke-width="1.2" stroke-linecap="round"/>
+      <path d="M14 105v-6h12v-7" fill="none" stroke="#94a3b8" stroke-width="2" stroke-linejoin="round"/>
+      <rect x="23.4" y="81" width="5.2" height="12" rx="2.2" fill="#1e293b"/>
+      <ellipse cx="32" cy="76" rx="5" ry="11" fill="#a8693a" transform="rotate(34 32 76)"/>
+      <ellipse cx="26" cy="84" rx="4.4" ry="3.8" fill="#8a5430"/>
       <!-- lentes de sol (de perfil) -->
       <g class="capi__lentes">
         <path d="M48 22.5h16l-1.3 7.4c-.5 2.6-2.5 3.7-5 3.7h-3.8c-3.2 0-5.6-2.1-6-4.9Z" fill="url(#capi-espejo)" stroke="#0f172a" stroke-width="1.4" stroke-linejoin="round"/>
