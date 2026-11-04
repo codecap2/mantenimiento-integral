@@ -188,15 +188,15 @@ capi.innerHTML = `
       <path d="M30 18c8-2 22-2 32 0" fill="none" stroke="#d6a065" stroke-width="3" stroke-linecap="round" opacity="0.6"/>
       <ellipse cx="13" cy="38" rx="7" ry="8" fill="#a8693a"/>
       <path d="M9 34q3-2 6 0" fill="none" stroke="#3b2414" stroke-width="2" stroke-linecap="round"/>
-      <path d="M12 50q7 4 14 1" fill="none" stroke="#3b2414" stroke-width="1.8" stroke-linecap="round"/>
+      <path d="M12 49q7 5.5 15 1" fill="none" stroke="#3b2414" stroke-width="1.8" stroke-linecap="round"/>
       <ellipse cx="46" cy="44" rx="7" ry="4" fill="#fb7185" opacity="0.3"/>
-      <!-- ojo de "side eye": párpado a la mitad y la pupila viendo hacia ti -->
+      <!-- ojo de "side eye" relajado: párpado apenas caído y la pupila viendo hacia ti -->
       <g class="capi__ojos">
-        <ellipse cx="54" cy="28" rx="6" ry="4.2" fill="#fdf6ec"/>
-        <circle cx="58" cy="28.6" r="2.9" fill="#1f130a"/>
-        <circle cx="59" cy="27.6" r="0.9" fill="#fff"/>
-        <path d="M47.5 28.4c1-4.6 4-6.2 6.5-6.2s5.5 1.6 6.5 6.2Z" fill="#c08048"/>
-        <path d="M47.5 28.4h13" stroke="#5b3a21" stroke-width="1.8" stroke-linecap="round"/>
+        <ellipse cx="54" cy="28" rx="5.6" ry="4.8" fill="#fdf6ec"/>
+        <circle cx="57.4" cy="28.8" r="3.4" fill="#1f130a"/>
+        <circle cx="58.7" cy="27.5" r="1.2" fill="#fff"/>
+        <path d="M48.2 26.6c1.6-3.4 3.8-4.6 5.8-4.6s4.2 1.2 5.8 4.6c-1.8-.6-3.8-.9-5.8-.9s-4 .3-5.8.9Z" fill="#c08048"/>
+        <path d="M48.4 26.7q5.6-1.9 11.2 0" fill="none" stroke="#7c4a26" stroke-width="1.1" stroke-linecap="round"/>
       </g>
       <!-- lentes de sol (de perfil) -->
       <g class="capi__lentes">
