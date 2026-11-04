@@ -153,7 +153,7 @@ document.addEventListener("pointermove", (e) => {
   raiz.classList.toggle("sobre-patito", !!patitoTocado(e));
 }, { passive: true });
 
-// ===== Capi: en pausa mientras decidimos su diseÃ±o final. Cambia a true para que vuelva =====
+// ===== Capi: en pausa mientras decidimos su diseño final. Cambia a true para que vuelva =====
 const MOSTRAR_CAPI = false;
 if (MOSTRAR_CAPI) {
   // ===== Capi: el capibara ayudante de obra, junto al botón de WhatsApp =====
@@ -187,7 +187,7 @@ if (MOSTRAR_CAPI) {
           <path d="M8 13v13h16V13" fill="none" stroke="#fff" stroke-width="3"/>
           <path d="M16 15.5s-3 3.2-3 5.3a3 3 0 0 0 6 0c0-2.1-3-5.3-3-5.3Z" fill="#38bdf8"/>
         </g>
-        <!-- cinturÃ³n con pinzas (izquierda) y llave Stillson roja (derecha) -->
+        <!-- cinturón con pinzas (izquierda) y llave Stillson roja (derecha) -->
         <rect x="38" y="120" width="48" height="6" rx="2.5" fill="#7c4a26" stroke-width="1.8"/>
         <rect x="58.5" y="119" width="7" height="8" rx="1.5" fill="#fbbf24" stroke-width="1.6"/>
         <g transform="translate(46 128) scale(0.5)" stroke-width="1.2">
@@ -208,7 +208,7 @@ if (MOSTRAR_CAPI) {
         <!-- orejitas arriba -->
         <ellipse cx="32" cy="27" rx="7" ry="8" fill="#c8956a"/><ellipse cx="32" cy="29" rx="3.4" ry="4.4" fill="#a8714b" stroke="none"/>
         <ellipse cx="92" cy="27" rx="7" ry="8" fill="#c8956a"/><ellipse cx="92" cy="29" rx="3.4" ry="4.4" fill="#a8714b" stroke="none"/>
-        <!-- cabezota, mÃ¡s ancha que el cuerpo -->
+        <!-- cabezota, más ancha que el cuerpo -->
         <path d="M22 58c0-26 16-40 40-40s40 14 40 40c0 22-16 32-40 32S22 80 22 58Z" fill="#c8956a"/>
         <path d="M56 24l1 4M62 23v4M68 24l-1 4" fill="none" stroke-width="1.6" opacity="0.7"/>
         <!-- hocico grande con nariz ovalada y sonrisa -->
@@ -311,7 +311,12 @@ let pendiente = false;
 function alBajar() {
   const maximo = Math.max(1, raiz.scrollHeight - window.innerHeight);
   const avance = Math.min(1, window.scrollY / maximo);
-  const nivel = reducirMovimiento ? 0.4 : 0.22 + avance * 0.78;
+  let nivel = reducirMovimiento ? 0.4 : 0.22 + avance * 0.78;
+  // El agua se detiene antes del tubo de la cabecera, para que siempre se vea el chorro cayendo
+  if (tuboCabecera) {
+    const boquilla = tuboCabecera.getBoundingClientRect().top + 46;
+    if (boquilla > 0) nivel = Math.min(nivel, Math.max(0.1, 1 - (boquilla + 110) / window.innerHeight));
+  }
   raiz.style.setProperty("--flujo", (window.scrollY * 0.6).toFixed(1));
   raiz.style.setProperty("--nivel", nivel.toFixed(3));
   acomodarChorro(nivel);
